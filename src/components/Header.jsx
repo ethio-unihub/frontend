@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
@@ -95,9 +94,7 @@ export const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-
-
-
+                
                 className="w-6 h-6"
               >
                 <path
@@ -164,8 +161,6 @@ export const Header = () => {
             </svg>
           </button>
         </div>
-
-Ludis, [3/27/2024 5:47 PM]
 
 
         <div
@@ -264,8 +259,6 @@ Ludis, [3/27/2024 5:47 PM]
                 Bonnie Green
               </span>
 
-Ludis, [3/27/2024 5:47 PM]
-
               <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
                 name@flowbite.com
               </span>
@@ -310,3 +303,4 @@ Ludis, [3/27/2024 5:47 PM]
     </nav>
   );
 };
+
