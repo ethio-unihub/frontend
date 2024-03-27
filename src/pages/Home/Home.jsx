@@ -6,7 +6,7 @@ export const Home = () => {
     <div className="flex flex-col items-center justify-center h-screen">
       <div>
         <Link to="/comments" className="text-white">
-          <h1 className='text-2xl'>Link to the Comments page</h1>
+          <h1 className='text-2xl'>Link to Comment/reply section</h1>
         </Link>
       </div>  
     </div>
