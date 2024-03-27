@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import React from "react";
 import { Home, Register, Login } from "../pages/";
+import Comments from '../components/Comments';
 
 export const ALLRoutes = () => {
   return (
@@ -9,7 +10,9 @@ export const ALLRoutes = () => {
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/comments" element={<Comments />} />
       </Routes>
     </div>
   );
 };
+
