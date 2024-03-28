@@ -5,7 +5,7 @@ import Comments from '../components/Comments';
 
 export const ALLRoutes = () => {
   return (
-    <div className="min-h-full w-full absolute dark:bg-slate-800">
+    <div className="min-h-full w-full fixed left-0 top-0 dark:bg-slate-800">
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />

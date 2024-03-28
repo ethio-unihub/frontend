@@ -1,14 +1,16 @@
-import Comments from '../../components/Comments';
-import { Link } from 'react-router-dom';
+import { LeftBar } from "../../components";
+import { ForYou } from "./ForYou";
 
 export const Home = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div>
-        <Link to="/comments" className="text-white">
-          <h1 className='text-2xl'>Link to Comment/reply section</h1>
-        </Link>
-      </div>  
+    <div className="flex gap-12">
+      <LeftBar />
+      <div className="pb-6 h-screen overflow-y-auto">
+        <div className="mt-[200px] md:ml-64 md:mt-[85px]  px-10">
+          <ForYou />
+        </div>
+
+      </div>
     </div>
   );
 };
