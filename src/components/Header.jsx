@@ -206,7 +206,7 @@ export const Header = () => {
                 }
                 end
               >
-                Home
+                For You 
               </NavLink>
             </li>
             <li>
@@ -216,7 +216,7 @@ export const Header = () => {
                   isActive ? activeClass : inactiveClass
                 }
               >
-                Popular
+                Following
               </NavLink>
             </li>
           </ul>
