@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTelegram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-// import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faGithub } from "@fortawesome/free-brands-svg-icons";
+// // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faTelegram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+// // import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 const Footer = () => {
   return (
     <footer>
@@ -26,7 +26,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           className="mr-4"
         >
-          <FontAwesomeIcon icon={faGithub} size="2xl" />
+          {/* <FontAwesomeIcon icon={faGithub} size="2xl" /> */}
         </a>
         <a
           href="https://t.me/example"
@@ -40,7 +40,7 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faLinkedin} size="2xl" className="ml-9" />
+          {/* <FontAwesomeIcon icon={faLinkedin} size="2xl" className="ml-9" /> */}
         </a></div>
         
         {/* <a href="mailto:example@example.com">
