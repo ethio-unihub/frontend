@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import Logo from "../assets/logo.png";
-import like from "../assets/icons/like.svg";
-import upvote from "../assets/icons/upvote.svg";
-import downvote from "../assets/icons/downvote.svg";
 
 export const FeedCard = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const [more, setMore] = useState(false);
 
   const handlePrevSlide = () => {
     setActiveSlide((prevSlide) => (prevSlide === 0 ? 4 : prevSlide - 1));
@@ -101,13 +99,20 @@ export const FeedCard = () => {
           Here are the biggest enterprise technology acquisitions of 2021 so
           far, in reverse chronological order.
         </p>
+        <div className="py-2 flex flex-wrap max-w-75">
+          <a
+            href="##"
+            class="bg-indigo-100 my-2 text-gray-600 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-white"
+          >
+            Indigo
+          </a>
+        </div>
         <div className="flex gap-2">
           <button
             type="button"
-            class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            <img src={like} alt="" />
-            <span class="sr-only">favorite</span>
+            <i class="fa-regular fa-thumbs-up"></i>
             <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white  bg-slate-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
               20
             </div>
@@ -125,35 +130,57 @@ export const FeedCard = () => {
 
           <button
             type="button"
-            class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
-            <img src={like} alt="" />
-            <span class="sr-only">favorite</span>
+            <i class="fa-regular fa-share-from-square"></i>
           </button>
-          <button
-            type="button"
-            class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <img src={like} alt="" />
-            <span class="sr-only">favorite</span>
-          </button>
+          <div>
+            <button
+              id="dropdownDefaultButton"
+              data-dropdown-toggle="dropdown"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              type="button"
+              onClick={() => setMore(!more)}
+            >
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+
+            <div
+              id="dropdown"
+              class={` ${
+                more || "hidden"
+              }   absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
+            >
+              <ul
+                class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    <i class="fa-regular fa-flag"></i> Report
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <div className="p-5 md:p-20 justify-center flex md:block gap-2  text-gray-800 items-center dark:text-white">
         <button
           type="button"
-          class="relative inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          <img src={upvote} alt="" />
-          <span class="sr-only">upvote</span>
+          <i class="fa-solid fa-caret-up"></i>
         </button>
-        <div className="size-12  flex items-center justify-center">0</div>
+        <div className="py-2  flex items-center justify-center">0</div>
         <button
           type="button"
-          class="relative size-12 inline-flex items-center p-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          <img src={downvote} alt="" />
-          <span class="sr-only">downvote</span>
+          <i class="fa-solid fa-caret-down"></i>
         </button>
       </div>
     </a>
