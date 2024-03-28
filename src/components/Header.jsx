@@ -29,7 +29,7 @@ export const Header = () => {
     "text-base block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700";
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-white absolute md:fixed z-10 md:w-full  border-gray-200 md:h-[75px] dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link
           to="/"
@@ -94,7 +94,6 @@ export const Header = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                
                 className="w-6 h-6"
               >
                 <path
@@ -162,7 +161,6 @@ export const Header = () => {
           </button>
         </div>
 
-
         <div
           className={`items-center justify-between ${
             hidden ? "hidden" : ""
@@ -223,51 +221,51 @@ export const Header = () => {
             </li>
           </ul>
         </div>
-        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex items-center pt-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             Sign up
           </button>
           <button
             type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
           >
             Sign In
           </button>
           {/* <button
             type="button"
-            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
             id="user-menu-button"
             aria-expanded="false"
             data-dropdown-toggle="user-dropdown"
             data-dropdown-placement="bottom"
             onClick={() => setProfile(!profile)}
           >
-            <span class="sr-only">Open user menu</span>
-            <img class="w-8 h-8 rounded-full" src={Logo} alt="user photo" />
+            <span className="sr-only">Open user menu</span>
+            <img className="w-8 h-8 rounded-full" src={Logo} alt="user photo" />
           </button>
           <div
-            class={`z-50 ${
+            className={`z-50 ${
               profile || "hidden"
             } absolute top-12 right-6 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
             id="user-dropdown"
           >
-            <div class="px-4 py-3">
-              <span class="block text-sm text-gray-900 dark:text-white">
+            <div className="px-4 py-3">
+              <span className="block text-sm text-gray-900 dark:text-white">
                 Bonnie Green
               </span>
 
-              <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">
+              <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
                 name@flowbite.com
               </span>
             </div>
-            <ul class="py-2" aria-labelledby="user-menu-button">
+            <ul className="py-2" aria-labelledby="user-menu-button">
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Dashboard
                 </a>
@@ -275,7 +273,7 @@ export const Header = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Settings
                 </a>
@@ -283,7 +281,7 @@ export const Header = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Earnings
                 </a>
@@ -291,7 +289,7 @@ export const Header = () => {
               <li>
                 <a
                   href="#"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                 >
                   Sign out
                 </a>
@@ -303,4 +301,3 @@ export const Header = () => {
     </nav>
   );
 };
-
