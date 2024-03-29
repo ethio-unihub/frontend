@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import React from "react";
 import { Home, Register, Login } from "../pages/";
-import Comments from '../components/Comments';
+import Comments from "../components/Comments";
+import { PrivateRoute } from "../utils/PrivateRoute";
 
 export const ALLRoutes = () => {
   return (
@@ -15,4 +16,3 @@ export const ALLRoutes = () => {
     </div>
   );
 };
-

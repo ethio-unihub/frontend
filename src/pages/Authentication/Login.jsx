@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Input, Ripple, initTWE } from "tw-elements";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 export function Login() {
   useEffect(() => {
