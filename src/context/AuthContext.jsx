@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        refresh: authTokens.refresh,
+        refresh: authTokens?.refresh,
       }),
     });
 
@@ -69,7 +69,9 @@ export const AuthProvider = ({ children }) => {
     } else {
       logoutUser();
     }
-    console.log("updated");
+    if (loading) {
+      setLoading(false);
+    }
   };
 
   const value = {
@@ -79,11 +81,16 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    if (loading) {
+      updateToken();
+    }
+
+    let fourMin = 1000 * 60 * 4;
     let interval = setInterval(() => {
       if (authTokens) {
         updateToken();
       }
-    }, 4000);
+    }, fourMin);
     return () => clearInterval(interval);
   }, [authTokens, loading]);
 
