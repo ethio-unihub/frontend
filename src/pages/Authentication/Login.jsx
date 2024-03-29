@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Input, Ripple, initTWE } from "tw-elements";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { ButtonLoading } from "../../components";
 
 export function Login() {
   let { loginUser } = useContext(AuthContext);
@@ -10,6 +11,7 @@ export function Login() {
   }, []);
 
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const [click, setClick] = useState(false);
 
   const { username, password } = formData;
 
@@ -18,9 +20,9 @@ export function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    setClick(true);
     loginUser(e);
-    setFormData({ username: "", password: "" })
+    setFormData({ username: "", password: "" });
   };
 
   return (
@@ -51,6 +53,7 @@ export function Login() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="abebe"
                   name="username"
+                  itemID="username"
                   value={username}
                   onChange={(e) => onChange(e)}
                   required
@@ -66,6 +69,7 @@ export function Login() {
                 <input
                   type="password"
                   id="password"
+                  itemID="password"
                   onChange={(e) => onChange(e)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   name="password"
@@ -94,19 +98,19 @@ export function Login() {
                 type="submit"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Submit
+                {click ? <ButtonLoading text="signing in" /> : "Login"}
               </button>
               <div className="w-full p-4 flex justify-between">
                 <Link
                   to="/register"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                   New Account?
                 </Link>
 
                 <a
                   href="#"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                 >
                   Forgot Password
                 </a>
