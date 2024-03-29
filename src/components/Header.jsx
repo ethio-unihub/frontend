@@ -4,7 +4,7 @@ import Logo from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
 
 export const Header = () => {
-  let { user } = useContext(AuthContext);
+  let { user, logoutUser } = useContext(AuthContext);
   const [hidden, setHidden] = useState(true);
   const [profile, setProfile] = useState(false);
   const navigate = useNavigate();
@@ -283,12 +283,13 @@ export const Header = () => {
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    <button
+                      type="button"
+                      onClick={logoutUser}
+                      className="block px-4 w-full py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
                       Sign out
-                    </a>
+                    </button>
                   </li>
                 </ul>
               </div>
