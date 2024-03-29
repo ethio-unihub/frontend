@@ -23,7 +23,7 @@ export const ALLRoutes = () => {
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="password/reset/confirm/:uid/:token" element={<ResetPassword />} />
+        <Route path="/password/reset/confirm/:uid/:token" element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </div>

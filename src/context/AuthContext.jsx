@@ -133,6 +133,49 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "error", text: error.message });
     }
   };
+
+
+  let registerUser = async (e) => {
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}auth/users/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid: uid,
+            token: token,
+            new_password: new_password,
+            re_new_password: re_new_password,
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+  
+      if (response.status === 204) {
+        addMessage({
+          type: "success",
+          text: `Password reset successfully.`,
+        });
+        navigate("/login");
+      } else {
+        let data = await response.json();
+        for (let key in data) {
+          data[key].forEach((value) => {
+            addMessage({
+              type: "error",
+              text: value,
+            });
+          });
+        }
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
+    }
+  };
   
   let updateToken = async () => {
     try {

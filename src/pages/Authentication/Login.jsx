@@ -27,7 +27,7 @@ export function Login() {
   };
 
   return (
-    <section className="h-screen w-full flex justify-center items-center">
+    <section className="h-screen w-full mt-[300px] md:mt-0 flex justify-center items-center">
       <div className="dark:text-white">
         {/* Left column container with background*/}
         <div className="flex h-full flex-wrap items-center justify-center lg:justify-between">
