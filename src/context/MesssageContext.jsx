@@ -26,7 +26,7 @@ export const MessageProvider = ({ children }) => {
           deleteMessage(0);
         }, i * 3000);
       }
-    }, 15000);
+    }, 20000);
   };
 
   useEffect(() => {

@@ -21,7 +21,8 @@ export function Register() {
   });
   const [click, setClick] = useState(false);
 
-  const { password, re_password } = formData;
+  const { first_name, last_name, email, username, password, re_password } =
+    formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -31,7 +32,7 @@ export function Register() {
     setClick(true);
     await registerUser(e);
     setClick(false);
-    setFormData({ ...formData, password: "", re_password: "" });
+    setFormData({ ...formData, re_password: "" });
   };
 
   return (
@@ -45,38 +46,38 @@ export function Register() {
                 <div>
                   <div className="mb-5">
                     <label
-                      htmlFor="firstName"
+                      htmlFor="first_name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       First Name
                     </label>
                     <input
                       type="text"
-                      id="firstName"
+                      id="first_name"
                       autoComplete="on"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Your first name here"
-                      name="firstName"
-                      // value={firstName}
+                      name="first_name"
+                      value={first_name}
                       onChange={(e) => onChange(e)}
                       required
                     />
                   </div>
                   <div className="mb-5">
                     <label
-                      htmlFor="lastName"
+                      htmlFor="last_name"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Last Name
                     </label>
                     <input
                       type="text"
-                      id="lastName"
+                      id="last_name"
                       autoComplete="on"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Your last name here"
-                      name="lastName"
-                      // value={lastName}
+                      name="last_name"
+                      value={last_name}
                       onChange={(e) => onChange(e)}
                       required
                     />
@@ -95,7 +96,7 @@ export function Register() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Your email here"
                       name="email"
-                      // value={email}
+                      value={email}
                       onChange={(e) => onChange(e)}
                       required
                     />
@@ -116,7 +117,7 @@ export function Register() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Your username here"
                       name="username"
-                      // value={username}
+                      value={username}
                       onChange={(e) => onChange(e)}
                       required
                     />
@@ -135,26 +136,26 @@ export function Register() {
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Your password here"
                       name="password"
-                      // value={password}
+                      value={password}
                       onChange={(e) => onChange(e)}
                       required
                     />
                   </div>
                   <div className="mb-5">
                     <label
-                      htmlFor="confirmPassword"
+                      htmlFor="re_password"
                       className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       Confirm Password
                     </label>
                     <input
                       type="password"
-                      id="confirmPassword"
+                      id="re_password"
                       autoComplete="off"
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Confirm your password"
-                      name="confirmPassword"
-                      // value={confirmPassword}
+                      name="re_password"
+                      value={re_password}
                       onChange={(e) => onChange(e)}
                       required
                     />
@@ -165,7 +166,7 @@ export function Register() {
                 type="submit"
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                {click ? <ButtonLoading text="Signing in" /> : "Sign in"}
+                {click ? <ButtonLoading text="Registering " /> : "Register"}
               </button>
               <div className="w-full p-4 flex justify-between">
                 <Link

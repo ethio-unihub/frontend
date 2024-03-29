@@ -41,9 +41,9 @@ export const AuthProvider = ({ children }) => {
           setTimeout(() => reject(new Error("Request timed out")), 20000)
         ),
       ]);
-  
+
       let data = await response.json();
-  
+
       if (response.status === 200) {
         setauthTokens(data);
         setUser(jwtDecode(data.access));
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "error", text: error.message });
     }
   };
-  
+
   let forgotPassword = async (e) => {
     try {
       let response = await Promise.race([
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
           setTimeout(() => reject(new Error("Request timed out")), 20000)
         ),
       ]);
-  
+
       if (response.status === 204) {
         addMessage({
           type: "success",
@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "error", text: error.message });
     }
   };
-  
+
   let resetPassword = async (uid, token, new_password, re_new_password) => {
     try {
       let response = await Promise.race([
@@ -111,7 +111,7 @@ export const AuthProvider = ({ children }) => {
           setTimeout(() => reject(new Error("Request timed out")), 20000)
         ),
       ]);
-  
+
       if (response.status === 204) {
         addMessage({
           type: "success",
@@ -133,7 +133,6 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "error", text: error.message });
     }
   };
-
 
   let registerUser = async (e) => {
     try {
@@ -144,24 +143,26 @@ export const AuthProvider = ({ children }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            uid: uid,
-            token: token,
-            new_password: new_password,
-            re_new_password: re_new_password,
+            first_name: e.target.first_name.value,
+            last_name: e.target.last_name.value,
+            email: e.target.email.value,
+            username: e.target.username.value,
+            password: e.target.password.value,
+            re_password: e.target.re_password.value,
           }),
         }),
         new Promise((_, reject) =>
-          setTimeout(() => reject(new Error("Request timed out")), 20000)
+          setTimeout(() => reject(new Error("Request timed out")), 60000)
         ),
       ]);
-  
-      if (response.status === 204) {
+
+      if (response.status === 201) {
         addMessage({
           type: "success",
-          text: `Password reset successfully.`,
+          text: "Thank you for creating your account. Please verify your email address."
         });
         navigate("/login");
-      } else {
+      } else if (response.status == 400) {
         let data = await response.json();
         for (let key in data) {
           data[key].forEach((value) => {
@@ -171,12 +172,17 @@ export const AuthProvider = ({ children }) => {
             });
           });
         }
+      } else {
+        addMessage({
+          type: "error",
+          text: "Please Try Again",
+        });
       }
     } catch (error) {
       addMessage({ type: "error", text: error.message });
     }
   };
-  
+
   let updateToken = async () => {
     try {
       let response = await Promise.race([
@@ -193,7 +199,7 @@ export const AuthProvider = ({ children }) => {
           setTimeout(() => reject(new Error("Request timed out")), 20000)
         ),
       ]);
-  
+
       let data = await response.json();
       if (response.status === 200) {
         setauthTokens(data);
@@ -212,7 +218,6 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "error", text: error.message });
     }
   };
-  
 
   let logoutUser = () => {
     setUser(null);
@@ -227,6 +232,7 @@ export const AuthProvider = ({ children }) => {
     logoutUser: logoutUser,
     forgotPassword: forgotPassword,
     resetPassword: resetPassword,
+    registerUser: registerUser,
   };
 
   useEffect(() => {
