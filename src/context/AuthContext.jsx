@@ -17,6 +17,8 @@ export const AuthProvider = ({ children }) => {
       ? jwtDecode(localStorage.getItem("authTokens"))
       : null
   );
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
   let loginUser = async (e) => {
@@ -48,15 +50,42 @@ export const AuthProvider = ({ children }) => {
     navigate("/login");
   };
 
-  
+  let updateToken = async () => {
+    let response = await fetch(`${backendUrl}auth/jwt/refresh/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        refresh: authTokens.refresh,
+      }),
+    });
+
+    if (response.status === 200) {
+      setauthTokens(data);
+      setUser(jwtDecode(data.access));
+      localStorage.setItem("authTokens", JSON.stringify(data));
+    } else {
+      logoutUser();
+    }
+
+    let data = await response.json();
+  };
+
+  useEffect(() => {
+    let interval = setInterval(() => {
+      if (authTokens) {
+        updateToken();
+      }
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [loading, authTokens]);
 
   const value = {
     user: user,
     loginUser: loginUser,
     logoutUser: logoutUser,
   };
-
-
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
