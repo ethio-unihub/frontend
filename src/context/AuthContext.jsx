@@ -25,52 +25,151 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   let loginUser = async (e) => {
-    let response = await fetch(`${backendUrl}auth/jwt/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }),
-    });
-    let data = await response.json();
-    if (response.status === 200) {
-      setauthTokens(data);
-      setUser(jwtDecode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
-      addMessage({ type: "success", text: "Logged in successfully" });
-      navigate("/");
-    } else {
-      addMessage({ type: "error", text: "Invalid Credentials" });
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}auth/jwt/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: e.target.username.value,
+            password: e.target.password.value,
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+  
+      let data = await response.json();
+  
+      if (response.status === 200) {
+        setauthTokens(data);
+        setUser(jwtDecode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+        addMessage({ type: "success", text: "Logged in successfully" });
+        navigate("/");
+      } else {
+        addMessage({ type: "error", text: "Invalid Credentials" });
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
     }
   };
-
+  
   let forgotPassword = async (e) => {
-    let response = await fetch(`${backendUrl}auth/users/reset_password/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: e.target.email.value,
-      }),
-    });
-    console.log(response);
-    if (response.status === 204) {
-      addMessage({
-        type: "success",
-        text: `The password reset link has been sent to the email address ${e.target.email.value}`,
-      });
-      navigate("/login");
-    } else {
-      addMessage({
-        type: "error",
-        text: "Trouble Sending Email please try again",
-      });
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}auth/users/reset_password/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: e.target.email.value,
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+  
+      if (response.status === 204) {
+        addMessage({
+          type: "success",
+          text: `The password reset link has been sent to the email address ${e.target.email.value}`,
+        });
+        navigate("/login");
+      } else {
+        addMessage({
+          type: "error",
+          text: "Trouble Sending Email please try again",
+        });
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
     }
   };
+  
+  let resetPassword = async (uid, token, new_password, re_new_password) => {
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}auth/users/reset_password_confirm/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid: uid,
+            token: token,
+            new_password: new_password,
+            re_new_password: re_new_password,
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+  
+      if (response.status === 204) {
+        addMessage({
+          type: "success",
+          text: `Password reset successfully.`,
+        });
+        navigate("/login");
+      } else {
+        let data = await response.json();
+        for (let key in data) {
+          data[key].forEach((value) => {
+            addMessage({
+              type: "error",
+              text: value,
+            });
+          });
+        }
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
+    }
+  };
+  
+  let updateToken = async () => {
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}auth/jwt/refresh/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            refresh: authTokens?.refresh,
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+  
+      let data = await response.json();
+      if (response.status === 200) {
+        setauthTokens(data);
+        setUser(jwtDecode(data.access));
+        localStorage.setItem("authTokens", JSON.stringify(data));
+      } else {
+        setUser(null);
+        setauthTokens(null);
+        localStorage.removeItem("authToken");
+        // navigate("/login");
+      }
+      if (loading) {
+        setLoading(false);
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
+    }
+  };
+  
 
   let logoutUser = () => {
     setUser(null);
@@ -79,39 +178,12 @@ export const AuthProvider = ({ children }) => {
     addMessage({ type: "success", text: "Logged out successfully" });
     navigate("/login");
   };
-
-  let updateToken = async () => {
-    let response = await fetch(`${backendUrl}auth/jwt/refresh/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        refresh: authTokens?.refresh,
-      }),
-    });
-
-    let data = await response.json();
-    if (response.status === 200) {
-      setauthTokens(data);
-      setUser(jwtDecode(data.access));
-      localStorage.setItem("authTokens", JSON.stringify(data));
-    } else {
-      setUser(null);
-      setauthTokens(null);
-      localStorage.removeItem("authToken");
-      navigate("/login");
-    }
-    if (loading) {
-      setLoading(false);
-    }
-  };
-
   const value = {
     user: user,
     loginUser: loginUser,
     logoutUser: logoutUser,
     forgotPassword: forgotPassword,
+    resetPassword: resetPassword,
   };
 
   useEffect(() => {

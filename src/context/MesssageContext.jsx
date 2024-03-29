@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const MessageContext = createContext();
 
@@ -18,6 +18,20 @@ export const MessageProvider = ({ children }) => {
   const clearMessages = () => {
     setMessages([]);
   };
+
+  const deleteMessagesWithDelay = () => {
+    setTimeout(() => {
+      for (let i = 0; i < messages.length; i++) {
+        setTimeout(() => {
+          deleteMessage(0);
+        }, i * 3000);
+      }
+    }, 15000);
+  };
+
+  useEffect(() => {
+    deleteMessagesWithDelay();
+  }, [messages]);
 
   return (
     <MessageContext.Provider
