@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Home, Register, Login } from "../pages/";
+import { Home, Register, Login, ForgotPassword } from "../pages/";
 import { Message } from "../components";
 import { MessageContext } from "../context";
 
@@ -22,6 +22,7 @@ export const ALLRoutes = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </div>

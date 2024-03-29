@@ -43,7 +43,32 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "success", text: "Logged in successfully" });
       navigate("/");
     } else {
-      addMessage({ type: "error", text: "Invalid Credentials" })
+      addMessage({ type: "error", text: "Invalid Credentials" });
+    }
+  };
+
+  let forgotPassword = async (e) => {
+    let response = await fetch(`${backendUrl}auth/users/reset_password/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: e.target.email.value,
+      }),
+    });
+    console.log(response);
+    if (response.status === 204) {
+      addMessage({
+        type: "success",
+        text: `The password reset link has been sent to the email address ${e.target.email.value}`,
+      });
+      navigate("/login");
+    } else {
+      addMessage({
+        type: "error",
+        text: "Trouble Sending Email please try again",
+      });
     }
   };
 
@@ -72,7 +97,10 @@ export const AuthProvider = ({ children }) => {
       setUser(jwtDecode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
     } else {
-      logoutUser();
+      setUser(null);
+      setauthTokens(null);
+      localStorage.removeItem("authToken");
+      navigate("/login");
     }
     if (loading) {
       setLoading(false);
@@ -83,6 +111,7 @@ export const AuthProvider = ({ children }) => {
     user: user,
     loginUser: loginUser,
     logoutUser: logoutUser,
+    forgotPassword: forgotPassword,
   };
 
   useEffect(() => {
