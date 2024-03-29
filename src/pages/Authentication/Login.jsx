@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Input, Ripple, initTWE } from "tw-elements";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export function Login() {
+  let { loginUser } = useContext(AuthContext);
   useEffect(() => {
     initTWE({ Input, Ripple });
   }, []);
@@ -17,7 +19,8 @@ export function Login() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    //login
+    loginUser(e);
+    setFormData({ username: "", password: "" })
   };
 
   return (
@@ -44,11 +47,12 @@ export function Login() {
                 <input
                   type="text"
                   id="username"
+                  autoComplete="off"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="abebe"
                   name="username"
                   value={username}
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                   required
                 />
               </div>
@@ -62,7 +66,7 @@ export function Login() {
                 <input
                   type="password"
                   id="password"
-                  onChange={e => onChange(e)}
+                  onChange={(e) => onChange(e)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   name="password"
                   value={password}
