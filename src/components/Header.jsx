@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../context";
 
 export const Header = () => {
   let { user, logoutUser } = useContext(AuthContext);

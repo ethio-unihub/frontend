@@ -1,17 +1,28 @@
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import React from "react";
 import { Home, Register, Login } from "../pages/";
-import Comments from "../components/Comments";
-import { PrivateRoute } from "../utils/PrivateRoute";
+import { Message } from "../components";
+import { MessageContext } from "../context";
 
 export const ALLRoutes = () => {
+  const { messages, clearMessages } = useContext(MessageContext);
+
   return (
-    <div className="min-h-full w-full fixed left-0 top-0 dark:bg-slate-800">
+    <div className=" overflow-x-hidden dark:bg-slate-800">
+      <div className="absolute top-[100px] right-1/4">
+        {messages.map((msg, index) => (
+          <Message
+            key={index}
+            index={index}
+            type={msg.type}
+            message={msg.text}
+          />
+        ))}
+      </div>
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/comments" element={<Comments />} />
       </Routes>
     </div>
   );

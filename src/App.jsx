@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { ALLRoutes } from "./routes/ALLRoutes";
 import { Header } from "./components";
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider, MessageProvider } from "./context";
 
 function App() {
   return (
-    <AuthProvider>
-      <Header />
-      <ALLRoutes />
-      {/* <Footer/> */}
-    </AuthProvider>
+    <MessageProvider>
+      <AuthProvider>
+        <Header />
+        <ALLRoutes />
+        {/* <Footer/> */}
+      </AuthProvider>
+    </MessageProvider>
   );
 }
 

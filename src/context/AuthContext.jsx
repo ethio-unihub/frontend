@@ -1,6 +1,7 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { MessageContext } from "./MesssageContext";
 
 const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
@@ -18,6 +19,8 @@ export const AuthProvider = ({ children }) => {
       : null
   );
   const [loading, setLoading] = useState(true);
+
+  const { addMessage } = useContext(MessageContext);
 
   const navigate = useNavigate();
 
@@ -37,9 +40,10 @@ export const AuthProvider = ({ children }) => {
       setauthTokens(data);
       setUser(jwtDecode(data.access));
       localStorage.setItem("authTokens", JSON.stringify(data));
+      addMessage({ type: "success", text: "Logged in successfully" });
       navigate("/");
     } else {
-      alert("Invalid credentials");
+      addMessage({ type: "error", text: "Invalid Credentials" })
     }
   };
 
@@ -47,6 +51,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setauthTokens(null);
     localStorage.removeItem("authToken");
+    addMessage({ type: "success", text: "Logged out successfully" });
     navigate("/login");
   };
 

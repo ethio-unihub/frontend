@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Input, Ripple, initTWE } from "tw-elements";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../context";
 import { ButtonLoading } from "../../components";
 
 export function Login() {
@@ -20,8 +20,8 @@ export function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setClick(true);
     loginUser(e);
+    setClick(true);
     setFormData({ username: "", password: "" });
   };
 
