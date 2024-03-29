@@ -61,6 +61,7 @@ export const AuthProvider = ({ children }) => {
       }),
     });
 
+    let data = await response.json();
     if (response.status === 200) {
       setauthTokens(data);
       setUser(jwtDecode(data.access));
@@ -68,8 +69,13 @@ export const AuthProvider = ({ children }) => {
     } else {
       logoutUser();
     }
+    console.log("updated");
+  };
 
-    let data = await response.json();
+  const value = {
+    user: user,
+    loginUser: loginUser,
+    logoutUser: logoutUser,
   };
 
   useEffect(() => {
@@ -77,15 +83,9 @@ export const AuthProvider = ({ children }) => {
       if (authTokens) {
         updateToken();
       }
-    }, 2000);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [loading, authTokens]);
-
-  const value = {
-    user: user,
-    loginUser: loginUser,
-    logoutUser: logoutUser,
-  };
+  }, [authTokens, loading]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
