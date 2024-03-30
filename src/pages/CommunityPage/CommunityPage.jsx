@@ -12,7 +12,7 @@ function CommunityPage() {
   const [value3, setValue3] = useState(1);
 
   const incrementNumber1 = () => {
-    setValue1((prevValue) => Math.min(prevValue - 1, 20));
+    setValue1((prevValue) => Math.min(prevValue - 1));
   };
 
   const decrementNumber1 = () => {
@@ -20,7 +20,7 @@ function CommunityPage() {
   };
 
   const incrementNumber2 = () => {
-    setValue2((prevValue) => Math.min(prevValue - 1, 20));
+    setValue2((prevValue) => Math.min(prevValue - 1));
   };
 
   const decrementNumber2 = () => {
@@ -28,7 +28,7 @@ function CommunityPage() {
   };
 
   const incrementNumber3 = () => {
-    setValue3((prevValue) => Math.min(prevValue - 1, 20));
+    setValue3((prevValue) => Math.min(prevValue - 1));
   };
 
   const decrementNumber3 = () => {
@@ -173,7 +173,7 @@ function CommunityPage() {
                           <p className="">
                             {" "}
                             <img
-                              className="pt-2 mt-42 w-12 h-12 rounded-full ml-1 "
+                              className="pt-1 mt-42 w-12 h-12 rounded-full ml-1 "
                               src={ppo}
                               alt="profile"
                             />
@@ -183,7 +183,7 @@ function CommunityPage() {
                           <p>
                             {" "}
                             <img
-                              className="pt-2 w-12 h-12 rounded-full "
+                              className="pt-1 w-12 h-12 rounded-full "
                               src={pp}
                               alt="profile"
                             />
@@ -191,10 +191,11 @@ function CommunityPage() {
                         </div>
                       </div>
                       <div className="flex-grow "></div>
-                      <div className="mr-64 text-s mt-48 text-gray-500">
-                        <p>Tue Feb 05 2036 4:00:06PM</p>
-                      </div>
-                      <div className="ml-4 mr-32 space-x-2">
+                      <p className=" mt-36 mr-6 text-center text-gray-500">
+                        {" "}
+                        Tue Feb 05 2045 4:00:06PM
+                      </p>
+                      <div className="mr-32 space-x-2">
                         <div className="flex">
                           <img className="h-12 w-12" src={comment} alt="" />
                           <button className="text-xl font-bold bg-white px-2 py-1 rounded">
@@ -213,7 +214,7 @@ function CommunityPage() {
                           ... more
                         </button>
                       </div>
-                      <div className="mt-0 mr-6">
+                      <div className="mt-0 ml-auto">
                         <div className="relative flex-6 items-center">
                           <button
                             className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
@@ -236,22 +237,23 @@ function CommunityPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-0   w-full">
-                    <div className="bg-white p-6 rounded-3xl shadow-2xl  flex items-center mb-1">
+
+                  <div className=" w-full">
+                    <div className="bg-white  rounded-3xl shadow-2xl  flex items-center mb-1">
                       <img
                         className=" h-48 w-64 mt-0 mr-4"
-                        src={image3}
+                        src={ppo}
                         alt="profile"
                       />
                       <div>
                         <p className="font-bold mt-0">Fiction is an illusion</p>
-                        <div className="flex mt-36 ">
+                        <div className="flex mt-32 ">
                           <p className="mt-4">By</p>
                           <p className="text-blue-500 ml-1 mt-4">u/reader2</p>
                           <p className="">
                             {" "}
                             <img
-                              className="pt-2 mt-42 w-12 h-12 rounded-full ml-1 "
+                              className="pt-1 mt-42 w-12 h-12 rounded-full ml-1 "
                               src={ppo}
                               alt="profile"
                             />
@@ -261,7 +263,7 @@ function CommunityPage() {
                           <p>
                             {" "}
                             <img
-                              className="pt-2 w-12 h-12 rounded-full "
+                              className="pt-1 w-12 h-12 rounded-full "
                               src={pp}
                               alt="profile"
                             />
@@ -269,10 +271,11 @@ function CommunityPage() {
                         </div>
                       </div>
                       <div className="flex-grow "></div>
-                      <div className="mr-64 text-s mt-48 text-gray-500">
-                        <p>Tue Feb 05 2036 4:00:06PM</p>
-                      </div>
-                      <div className="ml-4 mr-32 space-x-2">
+                      <p className=" mt-36 mr-6 text-center text-gray-500">
+                        {" "}
+                        Tue Feb 05 2045 4:00:06PM
+                      </p>
+                      <div className="mr-32 space-x-2">
                         <div className="flex">
                           <img className="h-12 w-12" src={comment} alt="" />
                           <button className="text-xl font-bold bg-white px-2 py-1 rounded">
@@ -291,8 +294,7 @@ function CommunityPage() {
                           ... more
                         </button>
                       </div>
-
-                      <div className="mt-0 ml-6">
+                      <div className="mt-0 ml-auto">
                         <div className="relative flex-6 items-center">
                           <button
                             className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
@@ -315,22 +317,23 @@ function CommunityPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="mt-0 w-full">
-                    <div className="bg-white p-6 rounded-3xl  shadow-2xl flex items-center mb-4">
+
+                  <div className=" w-full">
+                    <div className="bg-white  rounded-3xl shadow-2xl  flex items-center mb-1">
                       <img
                         className=" h-48 w-64 mt-0 mr-4"
-                        src={image2}
+                        src={ppo}
                         alt="profile"
                       />
                       <div>
                         <p className="font-bold mt-0">Fiction is an illusion</p>
-                        <div className="flex mt-36 ">
+                        <div className="flex mt-32 ">
                           <p className="mt-4">By</p>
                           <p className="text-blue-500 ml-1 mt-4">u/reader2</p>
                           <p className="">
                             {" "}
                             <img
-                              className="pt-2 mt-42 w-12 h-12 rounded-full ml-1 "
+                              className="pt-1 mt-42 w-12 h-12 rounded-full ml-1 "
                               src={ppo}
                               alt="profile"
                             />
@@ -340,7 +343,7 @@ function CommunityPage() {
                           <p>
                             {" "}
                             <img
-                              className="pt-2 w-12 h-12 rounded-full "
+                              className="pt-1 w-12 h-12 rounded-full "
                               src={pp}
                               alt="profile"
                             />
@@ -348,10 +351,11 @@ function CommunityPage() {
                         </div>
                       </div>
                       <div className="flex-grow "></div>
-                      <div className="mr-64 text-s mt-48 text-gray-500">
-                        <p>Tue Feb 05 2036 4:00:06PM</p>
-                      </div>
-                      <div className="ml-4 mr-32 space-x-2">
+                      <p className=" mt-36  mr-6 text-center text-gray-500">
+                        {" "}
+                        Tue Feb 05 2045 4:00:06PM
+                      </p>
+                      <div className="mr-32 space-x-2">
                         <div className="flex">
                           <img className="h-12 w-12" src={comment} alt="" />
                           <button className="text-xl font-bold bg-white px-2 py-1 rounded">
@@ -370,7 +374,7 @@ function CommunityPage() {
                           ... more
                         </button>
                       </div>
-                      <div className="mt-0">
+                      <div className="mt-0 ml-auto">
                         <div className="relative flex-6 items-center">
                           <button
                             className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
