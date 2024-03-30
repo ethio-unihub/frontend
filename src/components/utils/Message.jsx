@@ -9,7 +9,7 @@ export const Message = ({ index, type, message }) => {
   };
 
   return (
-    <div className="text-center items-center z-[10000]">
+    <div className="text-center items-center z-[20]">
       {type === "success" ? (
         <div
           id="toast-success"

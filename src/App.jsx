@@ -7,9 +7,11 @@ function App() {
   return (
     <MessageProvider>
       <AuthProvider>
-        <Header />
-        <ALLRoutes />
-        {/* <Footer/> */}
+        <div>
+          <Header />
+          <ALLRoutes />
+          {/* <Footer/> */}
+        </div>
       </AuthProvider>
     </MessageProvider>
   );
