@@ -5,7 +5,7 @@ import comment from "../CommunityPage/comment.jpg";
 import share from "../CommunityPage/share.jpg";
 import image2 from "../CommunityPage/image2.jpg";
 import image3 from "../CommunityPage/image3.jpg";
-
+import PostBox from "../../components/PostBox";
 function CommunityPage() {
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [contentChanged, setContentChanged] = useState(false);
