@@ -2,7 +2,7 @@ import { FeedCard } from "../../components";
 
 export const ForYou = () => {
   return (
-    <div className="scroll md:min-w-[800px] md:max-w-[900px]">
+    <div className="scroll md:min-w-[700px] md:max-w-[800px]">
       <FeedCard />
       <FeedCard />
       <FeedCard />
