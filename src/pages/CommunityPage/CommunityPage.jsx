@@ -7,14 +7,32 @@ import image2 from "../CommunityPage/image2.jpg";
 import image3 from "../CommunityPage/image3.jpg";
 
 function CommunityPage() {
-  const [value, setValue] = useState(1);
+  const [value1, setValue1] = useState(1);
+  const [value2, setValue2] = useState(1);
+  const [value3, setValue3] = useState(1);
 
-  const incrementNumber = () => {
-    setValue((prevValue) => Math.min(prevValue - 1, 20));
+  const incrementNumber1 = () => {
+    setValue1((prevValue) => Math.min(prevValue - 1, 20));
   };
 
-  const decrementNumber = () => {
-    setValue((prevValue) => Math.max(prevValue + 1, 1));
+  const decrementNumber1 = () => {
+    setValue1((prevValue) => Math.max(prevValue + 1, 1));
+  };
+
+  const incrementNumber2 = () => {
+    setValue2((prevValue) => Math.min(prevValue - 1, 20));
+  };
+
+  const decrementNumber2 = () => {
+    setValue2((prevValue) => Math.max(prevValue + 1, 1));
+  };
+
+  const incrementNumber3 = () => {
+    setValue3((prevValue) => Math.min(prevValue - 1, 20));
+  };
+
+  const decrementNumber3 = () => {
+    setValue3((prevValue) => Math.max(prevValue + 1, 1));
   };
 
   const [selectedFilter, setSelectedFilter] = useState("All");
@@ -199,18 +217,18 @@ function CommunityPage() {
                         <div className="relative flex-6 items-center">
                           <button
                             className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
-                            onClick={decrementNumber}
+                            onClick={decrementNumber1}
                           >
                             &#94;
                           </button>
                           <input
                             className="bg-white text-black text-3xl font-bold rounded p-6 py-4 w-32 text-center outline-none mx-2 mr-12"
-                            value={value}
+                            value={value1}
                             readOnly
                           />
                           <button
                             className="w-12 h-12 px-16 py-6 bg-orange-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
-                            onClick={incrementNumber}
+                            onClick={incrementNumber1}
                           >
                             &#709;
                           </button>
@@ -278,18 +296,18 @@ function CommunityPage() {
                         <div className="relative flex-6 items-center">
                           <button
                             className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
-                            onClick={decrementNumber}
+                            onClick={decrementNumber2}
                           >
                             &#94;
                           </button>
                           <input
                             className="bg-white text-black text-3xl font-bold rounded p-6 py-4 w-32 text-center outline-none mx-2 mr-12"
-                            value={value}
+                            value={value2}
                             readOnly
                           />
                           <button
                             className="w-12 h-12 px-16 py-6 bg-orange-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
-                            onClick={incrementNumber}
+                            onClick={incrementNumber2}
                           >
                             &#709;
                           </button>
@@ -356,18 +374,18 @@ function CommunityPage() {
                         <div className="relative flex-6 items-center">
                           <button
                             className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
-                            onClick={decrementNumber}
+                            onClick={decrementNumber3}
                           >
                             &#94;
                           </button>
                           <input
                             className="bg-white text-black text-3xl font-bold rounded p-6 py-4 w-32 text-center outline-none mx-2 mr-12"
-                            value={value}
+                            value={value3}
                             readOnly
                           />
                           <button
                             className="w-12 h-12 px-16 py-6 bg-orange-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
-                            onClick={incrementNumber}
+                            onClick={incrementNumber3}
                           >
                             &#709;
                           </button>
