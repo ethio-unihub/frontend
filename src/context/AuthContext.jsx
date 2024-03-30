@@ -133,6 +133,64 @@ export const AuthProvider = ({ children }) => {
       addMessage({ type: "error", text: error.message });
     }
   };
+  let activateAccount = async (uid, token) => {
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}auth/users/activation/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            uid: uid,
+            token: token,
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+
+      if (response.status === 204) {
+        addMessage({
+          type: "success",
+          text: `Account activated `,
+        });
+        navigate("/login");
+        return;
+      }
+
+      let data = await response.json();
+
+      if (typeof data === "object" && data !== null) {
+        for (let key in data) {
+          if (Array.isArray(data[key])) {
+            data[key].forEach((value) => {
+              addMessage({
+                type: "error",
+                text: value,
+              });
+            });
+          } else {
+            addMessage({
+              type: "error",
+              text: data[key],
+            });
+          }
+        }
+      } else {
+        addMessage({
+          type: "error",
+          text: "Unexpected response format",
+        });
+      }
+
+      navigate("/login");
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
+      navigate("/login");
+    }
+  };
 
   let registerUser = async (e) => {
     try {
@@ -159,7 +217,7 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         addMessage({
           type: "success",
-          text: "Thank you for creating your account. Please verify your email address."
+          text: "Thank you for creating your account. Please verify your email address.",
         });
         navigate("/login");
       } else if (response.status == 400) {
@@ -233,6 +291,7 @@ export const AuthProvider = ({ children }) => {
     forgotPassword: forgotPassword,
     resetPassword: resetPassword,
     registerUser: registerUser,
+    activateAccount: activateAccount,
   };
 
   useEffect(() => {
