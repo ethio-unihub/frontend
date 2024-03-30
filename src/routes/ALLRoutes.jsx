@@ -7,6 +7,7 @@ import {
   ForgotPassword,
   ResetPassword,
   ActivateAccount,
+  Post,
 } from "../pages/";
 import { Message } from "../components";
 import { MessageContext } from "../context";
@@ -26,17 +27,20 @@ export const ALLRoutes = () => {
           />
         ))}
       </div>
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route
-          path="/password/reset/confirm/:uid/:token"
-          element={<ResetPassword />}
-        />
-        <Route path="/activate/:uid/:token" element={<ActivateAccount />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <div className="mt-[200px] md:mt-[85px]">
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/question/:slug" element={<Post />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/password/reset/confirm/:uid/:token"
+            element={<ResetPassword />}
+          />
+          <Route path="/activate/:uid/:token" element={<ActivateAccount />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
     </div>
   );
 };

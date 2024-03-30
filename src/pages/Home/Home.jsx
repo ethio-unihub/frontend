@@ -3,7 +3,7 @@ import { ForYou } from "./ForYou";
 
 export const Home = () => {
   return (
-    <div className="mt-[200px] md:mt-[85px] flex gap-12 max-w-screen overflow-x-hidden overflow-y-hidden ">
+    <div className="flex gap-12 max-w-screen overflow-x-hidden overflow-y-hidden ">
       <LeftBar />
       <div className="pb-6">
         <div className=" md:ml-64   px-6">
