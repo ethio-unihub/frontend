@@ -7,6 +7,16 @@ import image2 from "../CommunityPage/image2.jpg";
 import image3 from "../CommunityPage/image3.jpg";
 
 function CommunityPage() {
+  const [value, setValue] = useState(1);
+
+  const incrementNumber = () => {
+    setValue((prevValue) => Math.min(prevValue - 1, 20));
+  };
+
+  const decrementNumber = () => {
+    setValue((prevValue) => Math.max(prevValue + 1, 1));
+  };
+
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [contentChanged, setContentChanged] = useState(false);
 
@@ -20,20 +30,20 @@ function CommunityPage() {
   return (
     <div className="text-black w-full mx-auto mt-4 pt-12">
       <div className="px-2 py-2 pt-2">
-        <div className="flex mb-1">
+        <div className="flex mb-0">
           <div
             style={{ marginTop: "-100px" }}
-            className="bg-slate-50  p-8 mt-4  w-full rounded-3xl flex items-end"
+            className="bg-slate-100  p-8 mt-4  w-full rounded-3xl flex items-end"
           >
             <img
-              className="pt-2 w-64 h-64 rounded-full "
+              className="pt-2 w-32 h-32 rounded-full "
               src={pp}
               alt="profile"
             />
             <div className="ml-12 flex-3">
               <h1 className="text-xl font-bold">4 Subscribers</h1>
             </div>
-            <div className="text-sm text-black mt-auto mx-auto my-auto items-center">
+            <div className="text-sm text-black mt-auto mx-auto my-auto items-center mr-4 mt-6">
               <div className="text-2xl font-bold ml-12"> t/books</div>
               <div className="ml-4"> Since Tue Sep 03 2024</div>
               <div className="text-xl font-semibold">
@@ -46,14 +56,14 @@ function CommunityPage() {
             </div>
           </div>
         </div>
-        <div className="bg-white w-full rounded-xl p-4  w-full">
+        <div className="bg-white rounded-xl pt-0  w-full">
           <div className="bg-white rounded-xl p-8  w-full">
-            <div className="shadow-2xl w-full mt-1 flex justify-around items-center px-4 py-2 rounded-xl">
-              <button className="bg-blue-400 shadow-2xl text-white px-48 py-4 text-xl rounded-3xl ">
+            <div className="shadow-2xl w-full mt-0 flex justify-around items-center px-4 py-2 rounded-xl">
+              <button className="bg-blue-400  text-white px-48 py-4 text-xl rounded-3xl font-bold ">
                 Leave
               </button>
 
-              <select className="rounded-lg py-1 bg-slate-50 w-24 px-24 text-xl">
+              <select className="rounded-lg py-2 px-2  bg-slate-100 w-24 px-24 text-xl font-bold">
                 <option value="option1">More</option>
                 <option value="option3">Option 1</option>
                 <option value="option3">Option 2</option>
@@ -61,11 +71,11 @@ function CommunityPage() {
               </select>
             </div>
           </div>
-          <div className="flex mt-6 bg-white text-xl font-semibold ">
-            <div className=" ">
+          <div className="flex bg-white text-xl font-semibold">
+            <div className="">
               <button
                 className={`bg-white px-4 py-2 mr-2 ${
-                  selectedFilter === "Today" && "bg-blue-400 text-white"
+                  selectedFilter === "Today" ? "bg-blue-400 text-black" : ""
                 }`}
                 onClick={() => handleFilterChange("Today")}
               >
@@ -73,7 +83,7 @@ function CommunityPage() {
               </button>
               <button
                 className={`bg-white px-4 py-2 mr-2 ${
-                  selectedFilter === "Week" && "bg-blue-400 text-white"
+                  selectedFilter === "Week" ? "bg-blue-400 text-black" : ""
                 }`}
                 onClick={() => handleFilterChange("Week")}
               >
@@ -81,15 +91,15 @@ function CommunityPage() {
               </button>
               <button
                 className={`bg-white px-4 py-2 ${
-                  selectedFilter === "Month" && "bg-blue-400 text-white"
+                  selectedFilter === "Month" ? "bg-blue-400 text-black" : ""
                 }`}
                 onClick={() => handleFilterChange("Month")}
               >
                 Month
               </button>
               <button
-                className={`bg-white px-4 py-2 ml-2 ${
-                  selectedFilter === "All" && "bg-blue-400 text-white"
+                className={`bg-white text-black px-4 py-2 ml-2 ${
+                  selectedFilter === "All" ? "bg-blue-400 text-black" : ""
                 }`}
                 onClick={() => handleFilterChange("All")}
               >
@@ -97,11 +107,13 @@ function CommunityPage() {
               </button>
             </div>
             <div className="flex ml-auto">
-              <button className="bg-white  px-4 py-2 ">Hot</button>
-              <button className="bg-white px-4 py-2 ">New</button>
-              <button className="bg-white  px-4 py-2 ">Top</button>
+              <button className="bg-white px-4 py-2">Hot</button>
+              <button className="bg-white px-4 py-2">New</button>
+              <button className="bg-white px-4 py-2">Top</button>
             </div>
           </div>
+
+          <hr />
 
           {contentChanged && (
             <div className="mt-4 text-center text-red-500 font-bold">
@@ -126,18 +138,18 @@ function CommunityPage() {
               </div>
             )}
             {selectedFilter === "All" && (
-              <div className="bg-white p-6 rounded-3xl  flex items-center mb-4">
+              <div className="bg-white rounded-3xl  flex items-center mb-0">
                 <div className="flex-1 ">
-                  <div className="mt-6 w-full">
-                    <div className="bg-white p-6 rounded-3xl shadow-2xl  flex items-center mb-4">
+                  <div className=" w-full">
+                    <div className="bg-white  rounded-3xl shadow-2xl  flex items-center mb-1">
                       <img
                         className=" h-48 w-64 mt-0 mr-4"
                         src={ppo}
                         alt="profile"
                       />
                       <div>
-                        <p className="font-bold mt-2">Fiction is an illusion</p>
-                        <div className="flex mt-36 ">
+                        <p className="font-bold mt-0">Fiction is an illusion</p>
+                        <div className="flex mt-32 ">
                           <p className="mt-4">By</p>
                           <p className="text-blue-500 ml-1 mt-4">u/reader2</p>
                           <p className="">
@@ -167,42 +179,54 @@ function CommunityPage() {
                       <div className="ml-4 mr-32 space-x-2">
                         <div className="flex">
                           <img className="h-12 w-12" src={comment} alt="" />
-                          <button className="text-2xl font-bold bg-white px-2 py-1 rounded">
+                          <button className="text-xl font-bold bg-white px-2 py-1 rounded">
                             758 comments
                           </button>
                         </div>
                         <br />
                         <div className="flex">
                           <img className="h-12 w-12 " src={share} alt="" />
-                          <button className="text-2xl border font-bold bg-white px-2 py-1 rounded">
+                          <button className="text-xl border font-bold bg-white px-2 py-1 rounded">
                             share
                           </button>
                         </div>
                         <br />
-                        <button className="text-2xl border font-bold bg-white px-2 py-1 rounded">
+                        <button className="text-xl border font-bold bg-white px-2 py-1 rounded">
                           ... more
                         </button>
                       </div>
-                      <div className="mt-8">
-                        <input
-                          className="bg-white text-black shadow-2xl text-3xl font-bold rounded py-8 px-4 w-32 text-center"
-                          type="number"
-                          placeholder="1"
-                          min="1"
-                          max="20"
-                        />
+                      <div className="mt-0 mr-6">
+                        <div className="relative flex-6 items-center">
+                          <button
+                            className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
+                            onClick={decrementNumber}
+                          >
+                            &#94;
+                          </button>
+                          <input
+                            className="bg-white text-black text-3xl font-bold rounded p-6 py-4 w-32 text-center outline-none mx-2 mr-12"
+                            value={value}
+                            readOnly
+                          />
+                          <button
+                            className="w-12 h-12 px-16 py-6 bg-orange-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
+                            onClick={incrementNumber}
+                          >
+                            &#709;
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-6 w-full">
-                    <div className="bg-white p-6 rounded-3xl shadow-2xl  flex items-center mb-4">
+                  <div className="mt-0   w-full">
+                    <div className="bg-white p-6 rounded-3xl shadow-2xl  flex items-center mb-1">
                       <img
                         className=" h-48 w-64 mt-0 mr-4"
                         src={image3}
                         alt="profile"
                       />
                       <div>
-                        <p className="font-bold mt-2">Fiction is an illusion</p>
+                        <p className="font-bold mt-0">Fiction is an illusion</p>
                         <div className="flex mt-36 ">
                           <p className="mt-4">By</p>
                           <p className="text-blue-500 ml-1 mt-4">u/reader2</p>
@@ -233,34 +257,47 @@ function CommunityPage() {
                       <div className="ml-4 mr-32 space-x-2">
                         <div className="flex">
                           <img className="h-12 w-12" src={comment} alt="" />
-                          <button className="text-2xl font-bold bg-white px-2 py-1 rounded">
+                          <button className="text-xl font-bold bg-white px-2 py-1 rounded">
                             758 comments
                           </button>
                         </div>
                         <br />
                         <div className="flex">
                           <img className="h-12 w-12 " src={share} alt="" />
-                          <button className="text-2xl border font-bold bg-white px-2 py-1 rounded">
+                          <button className="text-xl border font-bold bg-white px-2 py-1 rounded">
                             share
                           </button>
                         </div>
                         <br />
-                        <button className="text-2xl border font-bold bg-white px-2 py-1 rounded">
+                        <button className="text-xl border font-bold bg-white px-2 py-1 rounded">
                           ... more
                         </button>
                       </div>
-                      <div className="mt-8">
-                        <input
-                          className="bg-white text-black shadow-2xl text-3xl font-bold rounded py-8 px-4 w-32 text-center"
-                          type="number"
-                          placeholder="1"
-                          min="1"
-                          max="20"
-                        />
+
+                      <div className="mt-0 ml-6">
+                        <div className="relative flex-6 items-center">
+                          <button
+                            className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
+                            onClick={decrementNumber}
+                          >
+                            &#94;
+                          </button>
+                          <input
+                            className="bg-white text-black text-3xl font-bold rounded p-6 py-4 w-32 text-center outline-none mx-2 mr-12"
+                            value={value}
+                            readOnly
+                          />
+                          <button
+                            className="w-12 h-12 px-16 py-6 bg-orange-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
+                            onClick={incrementNumber}
+                          >
+                            &#709;
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="mt-4 w-full">
+                  <div className="mt-0 w-full">
                     <div className="bg-white p-6 rounded-3xl  shadow-2xl flex items-center mb-4">
                       <img
                         className=" h-48 w-64 mt-0 mr-4"
@@ -268,7 +305,7 @@ function CommunityPage() {
                         alt="profile"
                       />
                       <div>
-                        <p className="font-bold mt-2">Fiction is an illusion</p>
+                        <p className="font-bold mt-0">Fiction is an illusion</p>
                         <div className="flex mt-36 ">
                           <p className="mt-4">By</p>
                           <p className="text-blue-500 ml-1 mt-4">u/reader2</p>
@@ -299,30 +336,42 @@ function CommunityPage() {
                       <div className="ml-4 mr-32 space-x-2">
                         <div className="flex">
                           <img className="h-12 w-12" src={comment} alt="" />
-                          <button className="text-2xl font-bold bg-white px-2 py-1 rounded">
+                          <button className="text-xl font-bold bg-white px-2 py-1 rounded">
                             758 comments
                           </button>
                         </div>
                         <br />
                         <div className="flex">
                           <img className="h-12 w-12 " src={share} alt="" />
-                          <button className="text-2xl border font-bold bg-white px-2 py-1 rounded">
+                          <button className="text-xl border font-bold bg-white px-2 py-1 rounded">
                             share
                           </button>
                         </div>
                         <br />
-                        <button className="text-2xl border font-bold bg-white px-2 py-1 rounded">
+                        <button className="text-xl border font-bold bg-white px-2 py-1 rounded">
                           ... more
                         </button>
                       </div>
-                      <div className="mt-8">
-                        <input
-                          className="bg-white text-black shadow-2xl text-3xl font-bold rounded py-8 px-4 w-32 text-center"
-                          type="number"
-                          placeholder="1"
-                          min="1"
-                          max="20"
-                        />
+                      <div className="mt-0">
+                        <div className="relative flex-6 items-center">
+                          <button
+                            className="w-12 h-12 px-16 py-6 bg-blue-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
+                            onClick={decrementNumber}
+                          >
+                            &#94;
+                          </button>
+                          <input
+                            className="bg-white text-black text-3xl font-bold rounded p-6 py-4 w-32 text-center outline-none mx-2 mr-12"
+                            value={value}
+                            readOnly
+                          />
+                          <button
+                            className="w-12 h-12 px-16 py-6 bg-orange-300 text-black flex justify-center items-center text-4xl font-bold cursor-pointer outline-none shadow-md"
+                            onClick={incrementNumber}
+                          >
+                            &#709;
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
