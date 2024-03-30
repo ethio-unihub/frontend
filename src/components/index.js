@@ -5,3 +5,4 @@ export { ButtonLoading } from "./loading/ButtonLoading";
 export { Message } from "./utils/Message";
 export { Table } from "./tables/Table";
 export { ImageUpload } from "./utils/ImageUploader";
+export { Notification } from "./utils/Notification";

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { AuthContext } from "../context";
-import { ImageUpload } from "../components";
+import { ImageUpload, Notification } from "../components";
 
 export const Header = () => {
   let { user, logoutUser } = useContext(AuthContext);
@@ -234,6 +234,7 @@ export const Header = () => {
         <div className="flex items-center pt-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {user ? (
             <div className="flex gap-4 justify-center items-center">
+              <Notification />
               <div>
                 <button
                   onClick={toggleModal}
@@ -287,9 +288,11 @@ export const Header = () => {
                         <div className="p-4 md:p-5">
                           <form className="space-y-4" action="#">
                             <label className="dark:text-white">
-                              wanna add a main picture? (optional)
+                              wanna add pictures? (optional)
                             </label>
-                            <ImageUpload />
+                            <div className="w-full ">
+                              <ImageUpload x={3} />
+                            </div>
                             <div>
                               <label
                                 htmlFor="name"

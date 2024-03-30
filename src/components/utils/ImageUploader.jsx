@@ -37,23 +37,23 @@ export const ImageUpload = ({ x }) => {
   };
 
   return (
-    <div>
+    <div className="flex gap-2 ">
       {imagePreviews.map((preview, index) => (
         <div
           key={index}
-          className="flex items-center justify-center w-full mb-4"
+          className="flex items-center justify-center  w-[120px] h-[120px]  mb-4"
           onDrop={(event) => handleDropzoneDrop(event, index)}
           onDragOver={handleDropzoneDragOver}
         >
           <label
             htmlFor={`dropzone-file-${index}`}
-            className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+            className="flex flex-col items-center justify-center w-[120px] h-[120px]  border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
           >
             {preview ? (
               <img
                 src={preview}
                 alt="Preview"
-                className="w-full h-full object-cover rounded-lg"
+                className="w-[120px] h-[120px] bg-cover object-cover rounded-lg"
               />
             ) : (
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -73,11 +73,10 @@ export const ImageUpload = ({ x }) => {
                   />
                 </svg>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag and
-                  drop
+                  Click
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  Drag & Drop
                 </p>
               </div>
             )}
@@ -93,4 +92,3 @@ export const ImageUpload = ({ x }) => {
     </div>
   );
 };
-
