@@ -280,7 +280,7 @@ export const AuthProvider = ({ children }) => {
   let logoutUser = () => {
     setUser(null);
     setauthTokens(null);
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("authTokens");
     addMessage({ type: "success", text: "Logged out successfully" });
     navigate("/login");
   };
