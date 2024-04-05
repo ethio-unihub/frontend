@@ -7,12 +7,12 @@ export const Notification = () => {
       <button
         id="dropdownNotificationButton"
         data-dropdown-toggle="dropdownNotification"
-        class="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400"
+        className="relative inline-flex items-center text-sm font-medium text-center text-gray-500 hover:text-gray-900 focus:outline-none dark:hover:text-white dark:text-gray-400"
         type="button"
         onClick={() => setNot(!not)}
       >
         <svg
-          class="w-5 h-5"
+          className="w-5 h-5"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -21,31 +21,31 @@ export const Notification = () => {
           <path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z" />
         </svg>
 
-        <div class="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
+        <div className="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
       </button>
 
       {not &&<div
         id="dropdownNotification"
-        class={`z-20 absolute top-[70px] right-2 md:right-8 w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`}
+        className={`z-20 absolute top-[70px] right-2 md:right-8 w-full max-w-sm bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-800 dark:divide-gray-700`}
         aria-labelledby="dropdownNotificationButton"
       >
-        <div class="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
+        <div className="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
           Notifications
         </div>
-        <div class="divide-y divide-gray-100 dark:divide-gray-700">
+        <div className="divide-y divide-gray-100 dark:divide-gray-700">
           <a
             href="#"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            <div class="flex-shrink-0">
+            <div className="flex-shrink-0">
               <img
-                class="rounded-full w-11 h-11"
+                className="rounded-full w-11 h-11"
                 src="/docs/images/people/profile-picture-1.jpg"
                 alt="Jese image"
               />
-              <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
+              <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
                 <svg
-                  class="w-2 h-2 text-white"
+                  className="w-2 h-2 text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -56,32 +56,32 @@ export const Notification = () => {
                 </svg>
               </div>
             </div>
-            <div class="w-full ps-3">
-              <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+            <div className="w-full ps-3">
+              <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
                 New message from{" "}
-                <span class="font-semibold text-gray-900 dark:text-white">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   Jese Leos
                 </span>
                 : "Hey, what's up? All set for the presentation?"
               </div>
-              <div class="text-xs text-blue-600 dark:text-blue-500">
+              <div className="text-xs text-blue-600 dark:text-blue-500">
                 a few moments ago
               </div>
             </div>
           </a>
           <a
             href="#"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            <div class="flex-shrink-0">
+            <div className="flex-shrink-0">
               <img
-                class="rounded-full w-11 h-11"
+                className="rounded-full w-11 h-11"
                 src="/docs/images/people/profile-picture-2.jpg"
                 alt="Joseph image"
               />
-              <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-gray-900 border border-white rounded-full dark:border-gray-800">
+              <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-gray-900 border border-white rounded-full dark:border-gray-800">
                 <svg
-                  class="w-2 h-2 text-white"
+                  className="w-2 h-2 text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -91,35 +91,35 @@ export const Notification = () => {
                 </svg>
               </div>
             </div>
-            <div class="w-full ps-3">
-              <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-                <span class="font-semibold text-gray-900 dark:text-white">
+            <div className="w-full ps-3">
+              <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   Joseph Mcfall
                 </span>{" "}
                 and{" "}
-                <span class="font-medium text-gray-900 dark:text-white">
+                <span className="font-medium text-gray-900 dark:text-white">
                   5 others
                 </span>{" "}
                 started following you.
               </div>
-              <div class="text-xs text-blue-600 dark:text-blue-500">
+              <div className="text-xs text-blue-600 dark:text-blue-500">
                 10 minutes ago
               </div>
             </div>
           </a>
           <a
             href="#"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            <div class="flex-shrink-0">
+            <div className="flex-shrink-0">
               <img
-                class="rounded-full w-11 h-11"
+                className="rounded-full w-11 h-11"
                 src="/docs/images/people/profile-picture-3.jpg"
                 alt="Bonnie image"
               />
-              <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
+              <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-red-600 border border-white rounded-full dark:border-gray-800">
                 <svg
-                  class="w-2 h-2 text-white"
+                  className="w-2 h-2 text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -129,35 +129,35 @@ export const Notification = () => {
                 </svg>
               </div>
             </div>
-            <div class="w-full ps-3">
-              <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-                <span class="font-semibold text-gray-900 dark:text-white">
+            <div className="w-full ps-3">
+              <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   Bonnie Green
                 </span>{" "}
                 and{" "}
-                <span class="font-medium text-gray-900 dark:text-white">
+                <span className="font-medium text-gray-900 dark:text-white">
                   141 others
                 </span>{" "}
                 love your story. See it and view more stories.
               </div>
-              <div class="text-xs text-blue-600 dark:text-blue-500">
+              <div className="text-xs text-blue-600 dark:text-blue-500">
                 44 minutes ago
               </div>
             </div>
           </a>
           <a
             href="#"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            <div class="flex-shrink-0">
+            <div className="flex-shrink-0">
               <img
-                class="rounded-full w-11 h-11"
+                className="rounded-full w-11 h-11"
                 src="/docs/images/people/profile-picture-4.jpg"
                 alt="Leslie image"
               />
-              <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-green-400 border border-white rounded-full dark:border-gray-800">
+              <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-green-400 border border-white rounded-full dark:border-gray-800">
                 <svg
-                  class="w-2 h-2 text-white"
+                  className="w-2 h-2 text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -167,35 +167,35 @@ export const Notification = () => {
                 </svg>
               </div>
             </div>
-            <div class="w-full ps-3">
-              <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-                <span class="font-semibold text-gray-900 dark:text-white">
+            <div className="w-full ps-3">
+              <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   Leslie Livingston
                 </span>{" "}
                 mentioned you in a comment:{" "}
-                <span class="font-medium text-blue-500" href="#">
+                <span className="font-medium text-blue-500" href="#">
                   @bonnie.green
                 </span>{" "}
                 what do you say?
               </div>
-              <div class="text-xs text-blue-600 dark:text-blue-500">
+              <div className="text-xs text-blue-600 dark:text-blue-500">
                 1 hour ago
               </div>
             </div>
           </a>
           <a
             href="#"
-            class="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            <div class="flex-shrink-0">
+            <div className="flex-shrink-0">
               <img
-                class="rounded-full w-11 h-11"
+                className="rounded-full w-11 h-11"
                 src="/docs/images/people/profile-picture-5.jpg"
                 alt="Robert image"
               />
-              <div class="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-purple-500 border border-white rounded-full dark:border-gray-800">
+              <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-purple-500 border border-white rounded-full dark:border-gray-800">
                 <svg
-                  class="w-2 h-2 text-white"
+                  className="w-2 h-2 text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -205,15 +205,15 @@ export const Notification = () => {
                 </svg>
               </div>
             </div>
-            <div class="w-full ps-3">
-              <div class="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
-                <span class="font-semibold text-gray-900 dark:text-white">
+            <div className="w-full ps-3">
+              <div className="text-gray-500 text-sm mb-1.5 dark:text-gray-400">
+                <span className="font-semibold text-gray-900 dark:text-white">
                   Robert Brown
                 </span>{" "}
                 posted a new video: Glassmorphism - learn how to implement the
                 new design trend.
               </div>
-              <div class="text-xs text-blue-600 dark:text-blue-500">
+              <div className="text-xs text-blue-600 dark:text-blue-500">
                 3 hours ago
               </div>
             </div>
@@ -221,11 +221,11 @@ export const Notification = () => {
         </div>
         <a
           href="#"
-          class="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
+          className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
         >
-          <div class="inline-flex items-center ">
+          <div className="inline-flex items-center ">
             <svg
-              class="w-4 h-4 me-2 text-gray-500 dark:text-gray-400"
+              className="w-4 h-4 me-2 text-gray-500 dark:text-gray-400"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"

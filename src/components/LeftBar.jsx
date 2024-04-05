@@ -4,22 +4,22 @@ export const LeftBar = () => {
   const [side, setSide] = useState(true);
   const communities = [
     {
-      name: "r/React",
+      name: "Lemisa Elias",
       profilePic: "https://via.placeholder.com/50",
       subscribers: 100000,
     },
     {
-      name: "r/TailwindCSS",
+      name: "Leulseged ",
       profilePic: "https://via.placeholder.com/50",
       subscribers: 50000,
     },
     {
-      name: "r/WebDev",
+      name: "Michael ",
       profilePic: "https://via.placeholder.com/50",
       subscribers: 2000000,
     },
     {
-      name: "r/WebDev",
+      name: "Samual keleb",
       profilePic: "https://via.placeholder.com/50",
       subscribers: 2000000,
     },
@@ -65,24 +65,24 @@ export const LeftBar = () => {
 
             <ul className="space-y-2">
               {communities.map((community, index) => (
-                <li key={index} class="pt-3 pb-0 sm:pt-4">
-                  <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div class="flex-shrink-0">
+                <li key={index} className="pt-3 pb-0 sm:pt-4">
+                  <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                    <div className="flex-shrink-0">
                       <img
-                        class="w-8 h-8 rounded-full"
+                        className="w-8 h-8 rounded-full"
                         src={community.profilePic}
                         alt={community.name}
                       />
                     </div>
-                    <div class="flex-1 min-w-0">
-                      <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                         Lana Byrd
                       </p>
-                      <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                         email@flowbite.com
                       </p>
                     </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                       {community.subscribers.toLocaleString()}
                     </div>
                   </div>
@@ -149,9 +149,9 @@ export const LeftBar = () => {
               </li>
             </ul>
           </div>
-          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024{" "}
-            <a href="https://flowbite.com/" class="hover:underline">
+            <a href="https://flowbite.com/" className="hover:underline">
               Alpha Team
             </a>
             . All Rights Reserved.
