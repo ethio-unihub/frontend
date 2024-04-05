@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import Terms from "../pages/Terms";
+// import Abouts from "../pages/About";
 import {
   Home,
   Register,
@@ -39,6 +41,8 @@ export const ALLRoutes = () => {
           />
           <Route path="/activate/:uid/:token" element={<ActivateAccount />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/terms" element={<Terms />} />
+          {/* <Route path="/About" element={<Abouts />} /> */}
         </Routes>
       </div>
     </div>
