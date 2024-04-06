@@ -38,7 +38,6 @@ export const ForYou = () => {
           Gaming
         </button>
       </div>
-      <StringAvatarGenerator name={"Michael Workineh"} />
       <FeedCard />
       <FeedCard />
       <FeedCard />
