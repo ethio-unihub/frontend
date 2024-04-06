@@ -1,26 +1,26 @@
 import { useState } from "react";
-
+import ppimage from "../assets/male5.jpg";
 export const LeftBar = () => {
   const [side, setSide] = useState(true);
   const communities = [
     {
       name: "Lemisa Elias",
-      profilePic: "https://via.placeholder.com/50",
+      profilePic: "pp.jpg",
       subscribers: 100000,
     },
     {
       name: "Leulseged ",
-      profilePic: "https://via.placeholder.com/50",
+      profilePic: "pp.jpg",
       subscribers: 50000,
     },
     {
       name: "Michael ",
-      profilePic: "https://via.placeholder.com/50",
+      profilePic: "pp.jpg",
       subscribers: 2000000,
     },
     {
       name: "Samual keleb",
-      profilePic: "https://via.placeholder.com/50",
+      profilePic: "pp.jpg",
       subscribers: 2000000,
     },
 
@@ -70,16 +70,16 @@ export const LeftBar = () => {
                     <div className="flex-shrink-0">
                       <img
                         className="w-8 h-8 rounded-full"
-                        src={community.profilePic}
+                        src={ppimage}
                         alt={community.name}
                       />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        Lana Byrd
+                        {community.name}
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        email@flowbite.com
+                        {community.Email}
                       </p>
                     </div>
                     <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
@@ -108,12 +108,12 @@ export const LeftBar = () => {
                     <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                     <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                   </svg>
-                  <span className="ms-3">Terms & ..</span>
+                  <span className="ms-3">ABOUT us ..</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/terms"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 >
                   <svg
@@ -144,7 +144,7 @@ export const LeftBar = () => {
                     <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                     <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                   </svg>
-                  <span className="ms-3">Terms & ..</span>
+                  <span className="ms-3">Help..</span>
                 </a>
               </li>
             </ul>
