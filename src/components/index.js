@@ -6,3 +6,4 @@ export { Message } from "./utils/Message";
 export { Table } from "./tables/Table";
 export { ImageUpload } from "./utils/ImageUploader";
 export { Notification } from "./utils/Notification";
+export { QuestionCard } from "./loading/QuestionCard";
