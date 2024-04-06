@@ -29,11 +29,6 @@ export default function Profile(){
             <EditPage userBio={userBio} userUni={userUni} userName={userName} userEmail={userEmail} setUserBio={setUserBio} setUserUni={setUserUni} setUserEmail={setUserEmail} setUserName={setUserName}/>
             
             <PostNavigater/>
-            <FeedCard/>
-            <FeedCard/>
-            <FeedCard/>
-            <FeedCard/>
-            <FeedCard/>
         </div>
     )
 }
