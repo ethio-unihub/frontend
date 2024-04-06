@@ -1,14 +1,17 @@
 import { FeedCard } from "../../components";
-
+import StringAvatarGenerator from "../../components/utils/StringAvatarGenerator";
+import Logo from "../../assets/logo.png";
 export const ForYou = () => {
   return (
+    
     <div className="scroll md:min-w-[700px] md:max-w-[800px]">
+      
       <div className="flex items-center justify-center py-4 md:py-8 flex-wrap">
         <button
           type="button"
           className="text-blue-700 hover:text-white border border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800"
         >
-          All categories
+           All categories
         </button>
         <button
           type="button"
@@ -35,6 +38,7 @@ export const ForYou = () => {
           Gaming
         </button>
       </div>
+      <StringAvatarGenerator name={"Michael Workineh"} />
       <FeedCard />
       <FeedCard />
       <FeedCard />
