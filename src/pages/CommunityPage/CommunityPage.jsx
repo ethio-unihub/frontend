@@ -1,7 +1,7 @@
 import { LeftBar, Table } from "../../components";
 import CommunityTitleBar from "./CommunityTitleBar";
 import { FeedCard } from "../../components";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ppo from "../CommunityPage/pp.jpg";
 import pp from "../CommunityPage/profile.jpg";
 import comment from "../CommunityPage/comment.jpg";
@@ -10,8 +10,15 @@ import image2 from "../CommunityPage/image2.jpg";
 import image3 from "../CommunityPage/image3.jpg";
 
 function CommunityPage({communityName}) {
+  const [posts, setPosts] = useState([{}])
+  useEffect(() => {
+    setPosts([
+      { values: 1 },
+      { values: 2 },
+      { values: 3 },
+    ]);
+  }, []);
 
-  const [posts, setPosts] = useState([{value:1}, {value:1}, {value:1}, {value:1}, {value:1}, {value:1}])
   return(
       <div className="flex gap-12 max-w-screen overflow-x-hidden overflow-y-hidden ">
         <LeftBar />

@@ -1,6 +1,15 @@
 import { FeedCard } from "../../components"
+import { useState, useEffect } from "react"
+
 export default function Navigater(){
-    
+    const [posts, setPosts] = useState([])
+    useEffect(() => {
+        setPosts([
+          { values: 1 },
+          { values: 2 },
+          { values: 3 },
+        ]);
+      }, []);
     return(
         <div>
         <div class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700">
@@ -10,10 +19,9 @@ export default function Navigater(){
                 </span>
             </div>
         </div>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
+        {
+            posts.map((post, index)=>(<FeedCard key={index} />))
+        }
         </div>
     )
 }
