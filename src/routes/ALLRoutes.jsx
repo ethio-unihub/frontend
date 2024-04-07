@@ -3,6 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Terms from "../pages/Terms";
 // import Abouts from "../pages/About";
 import ProfilePage from "../pages/profilePage/ProfilePage";
+import CommunityPage from "../pages/CommunityPage/CommunityPage";
+
 import {
   Home,
   Register,
@@ -44,6 +46,7 @@ export const ALLRoutes = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/Profile" element={<ProfilePage/>} />
+          <Route path="/Community" element={<CommunityPage/>}/>
           {/* <Route path="/About" element={<Abouts />} /> */}
         </Routes>
       </div>

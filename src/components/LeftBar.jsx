@@ -4,22 +4,22 @@ export const LeftBar = () => {
   const [side, setSide] = useState(true);
   const communities = [
     {
-      name: "Lemisa Elias",
+      name: "Software Enginnering",
       profilePic: "pp.jpg",
       subscribers: 100000,
     },
     {
-      name: "Leulseged ",
+      name: "Electrical Engineering ",
       profilePic: "pp.jpg",
       subscribers: 50000,
     },
     {
-      name: "Michael ",
+      name: "Mechanical Engineering",
       profilePic: "pp.jpg",
       subscribers: 2000000,
     },
     {
-      name: "Samual keleb",
+      name: "Economics",
       profilePic: "pp.jpg",
       subscribers: 2000000,
     },
