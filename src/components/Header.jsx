@@ -5,41 +5,14 @@ import { AuthContext } from "../context";
 import { ImageUpload, Notification } from "../components";
 
 export const Header = () => {
-  let { user, logoutUser, loadingMyProfile, myprofile, authTokens } =
+  let { user, logoutUser, loadingMyProfile, myprofile } =
     useContext(AuthContext);
   const [hidden, setHidden] = useState(true);
   const [profile, setProfile] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showNotification, setShowNotification] = useState(true);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (myprofile) {
-  //     const id = user.user_id;
-  //     const notifications = async () => {
-  //       try {
-  //         const token = authTokens.access;
-  //         const response = await fetch(`${backendUrl}api/profile/${id}`, {
-  //           headers: {
-  //             Authorization: `Alpha ${token}`,
-  //           },
-  //         });
-  //         if (response.ok) {
-  //           const data = await response.json();
-  //           setProfile(data);
-  //         } else {
-  //           console.error("Failed to fetch profile data:", response.statusText);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching profile data:", error);
-  //       } finally {
-  //         setShowNotification(false); // Set loading state to false after fetching
-  //       }
-  //     };
-  //     notifications();
-  //   }
-  // }, [myprofile])
-
+ 
   const toggleModal = () => {
     setShowModal(!showModal);
   };

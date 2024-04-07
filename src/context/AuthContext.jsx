@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const [loadingMyProfile, setLoadingMyProfile] = useState(true);
   useEffect(() => {
-    if (user) {
+    if (authTokens) {
       const id = user.user_id;
       const getProfile = async () => {
         try {
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       };
       getProfile();
     }
-  }, [user]);
+  }, [authTokens]);
   const [loading, setLoading] = useState(true);
 
   const { addMessage } = useContext(MessageContext);
