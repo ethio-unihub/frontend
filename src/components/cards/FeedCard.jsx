@@ -1,187 +1,174 @@
 import React, { useState } from "react";
-import Logo from "../../assets/logo.png";
+import { formatDistanceToNow } from "date-fns";
 
-export const FeedCard = () => {
-  const [activeSlide, setActiveSlide] = useState(0);
+const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+
+export const FeedCard = ({ data }) => {
+  // console.log(data);
   const [more, setMore] = useState(false);
-
-  const handlePrevSlide = () => {
-    setActiveSlide((prevSlide) => (prevSlide === 0 ? 4 : prevSlide - 1));
-  };
-
-  const handleNextSlide = () => {
-    setActiveSlide((prevSlide) => (prevSlide === 4 ? 0 : prevSlide + 1));
-  };
+  const addedDate = new Date(data.added_time);
+  const timeAgo = formatDistanceToNow(addedDate, { addSuffix: true });
 
   return (
-    <a
-      href="#"
-      className="flex mt-4 flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:min-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-    >
-      <div
-        id="gallery"
-        className="relative w-[100%] m-2 rounded"
-        data-carousel="slide"
-      >
-        <div className="relative h-56 overflow-hidden rounded-lg ">
-          {[0, 1, 2, 3, 4].map((index) => (
-            <div
-              key={index}
-              className={`${
-                activeSlide === index ? "" : "hidden"
-              } duration-700 ease-in-out`}
-              data-carousel-item={activeSlide === index ? "active" : ""}
-            >
-              <img
-                src={Logo}
-                className="absolute block max-w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-s-lg"
-                alt={`Slide ${index + 1}`}
-              />
-            </div>
-          ))}
-        </div>
-        <button
-          type="button"
-          className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          data-carousel-prev
-          onClick={handlePrevSlide}
-        >
-          <span className="bg-gray-300 hover:text-gray-600  hover:bg-gray-400 inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30  dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg
-              className="w-4 h-4 text-white  dark:text-gray-800 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 1 1 5l4 4"
-              />
-            </svg>
-            <span className="sr-only">Previous</span>
-          </span>
-        </button>
-        <button
-          type="button"
-          className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-          data-carousel-next
-          onClick={handleNextSlide}
-        >
-          <span className="bg-gray-300 hover:text-gray-600  hover:bg-gray-400 inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30  dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg
-              className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 6 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m1 9 4-4-4-4"
-              />
-            </svg>
-            <span className="sr-only">Next</span>
-          </span>
-        </button>
-      </div>
-      <div className="flex flex-col justify-between p-4 leading-normal">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-          Noteworthy technology acquisitions 2021
-        </h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Here are the biggest enterprise technology acquisitions of 2021 so
-          far, in reverse chronological order.
-        </p>
-        <div className="py-2 flex flex-wrap max-w-75">
-          <a
-            href="##"
-            className="bg-indigo-100 my-2 text-gray-600 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-white"
-          >
-            Indigo
-          </a>
-        </div>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            className="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <i className="fa-regular fa-thumbs-up"></i>
-            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white  bg-slate-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-              20
-            </div>
-          </button>
-
-          <button
-            type="button"
-            className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Answers
-            <span className="inline-flex items-center justify-center w-4 h-4 ms-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
-              2
-            </span>
-          </button>
-
-          <button
-            type="button"
-            className="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <i className="fa-regular fa-share-from-square"></i>
-          </button>
-          <div>
-            <button
-              id="dropdownDefaultButton"
-              data-dropdown-toggle="dropdown"
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              type="button"
-              onClick={() => setMore(!more)}
-            >
-              <i className="fa-solid fa-ellipsis-vertical"></i>
-            </button>
-
-            <div
-              id="dropdown"
-              className={` ${
-                more || "hidden"
-              }   absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700`}
-            >
-              <ul
-                className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                aria-labelledby="dropdownDefaultButton"
+    <a href="#">
+      <div class="mt-5 max-w-xs flex flex-col bg-white border border-t-4 border-t-blue-600 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:border-t-blue-500 dark:shadow-slate-700/[.7]       min-w-full hover:bg-gray-100 dark:hover:bg-gray-700">
+        <div class="p-4 md:p-5">
+          <h3 class="text-lg font-bold text-gray-800 dark:text-white">
+            {data.name}
+          </h3>
+          <div className="flex gap-3 items-center p-2">
+            <div className="flex flex-col items-center text-center justify-center dark:text-white">
+              <button
+                type="button"
+                class="text-white p-0  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg px-3  me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
-                <li>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                <i class="fa-solid fa-caret-up text-2xl"></i>
+              </button>
+              <b className="pr-2 pd-2">
+                {data.upvote_count - data.downvote_count}
+              </b>
+              <button
+                type="button"
+                class="text-white p-0  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+              >
+                <i class="fa-solid fa-caret-down text-2xl"></i>
+              </button>
+            </div>
+            <p class="mt-2 text-gray-500 dark:text-gray-400">
+              {data.description.length >= 250
+                ? data.description.substring(0, 250) + "..."
+                : data.description}
+              <div className="flex flex-wrap gap-2 p-2">
+                {data.tags.map((tag) => (
+                  <span class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            </p>
+            <div className="flex flex-col items-center text-center justify-cente dark:text-white">
+              <i class="fa-regular fa-comments text-2xl dark:text-white text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2">
+                {data.comments_count > 0 && (
+                  <span class="absolute top-[-6px] right-[-16px] -mt-2 -ml-2">
+                    <div class="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white dark:bg-white dark:text-gray-800">
+                      {data.comments_count}
+                    </div>
+                  </span>
+                )}
+              </i>
+              <i class="fa-regular fa-floppy-disk text-2xl dark:text-white text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2">
+                {data.save_count > 0 && (
+                  <span class="absolute top-[-6px] right-[-16px] -mt-2 -ml-2">
+                    <div class="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white dark:bg-white dark:text-gray-800">
+                      {data.save_count}
+                    </div>
+                  </span>
+                )}
+              </i>
+              <i class="fa-regular fa-share-from-square dark:text-white text-2xl text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2"></i>
+              <i class=" dark:text-white text-2xl text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2">
+                <span
+                  class="material-symbols-outlined"
+                  onClick={() => setMore(!more)}
+                >
+                  more_vert
+                </span>
+                {more && (
+                  <div
+                    id="dropdownDots"
+                    class="z-10 absolute bg-white divide-y font-sans divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
                   >
-                    <i className="fa-regular fa-flag"></i> Report
-                  </a>
-                </li>
-              </ul>
+                    <ul
+                      class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                      aria-labelledby="dropdownMenuIconButton"
+                    >
+                      <li>
+                        <a
+                          href="#"
+                          class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        >
+                          Report
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </i>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-center px-6">
+              <div class="flex-shrink-0">
+                <img
+                  class="w-8 h-8 rounded-full"
+                  src={`${backendUrl}${data.owner.profile_pic}`}
+                  alt="Neil image"
+                />
+              </div>
+              <div class="flex-1 min-w-0 ms-4">
+                <p class="text-sm font-medium  text-gray-900 truncate dark:text-white flex items-center gap-1">
+                  {data.owner.first_name} {data.owner.last_name}
+                </p>
+                <p class="text-[13px] font-medium text-gray-900 truncate dark:text-white flex items-center gap-1">
+                  @{data.owner.username}{" "}
+                  {data.owner.verified && (
+                    <span class="material-symbols-outlined">verified</span>
+                  )}
+                </p>
+                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                  {timeAgo}
+                </p>
+              </div>
+              <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                <div class="grid gap-4 grid-cols-2 w-60 my-2.5">
+                  {data.images.length > 0 && (
+                    <div class="group relative">
+                      <button class="absolute w-full h-full bg-gray-900/90 hover:bg-gray-900/50 transition-all duration-300 rounded-lg flex items-center justify-center">
+                        <span class="text-xl font-medium text-white">
+                          +{data.images.length}
+                        </span>
+                        <div
+                          id="download-image"
+                          role="tooltip"
+                          class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+                        >
+                          Download image
+                          <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                      </button>
+                      <img
+                        src="https://images.squarespace-cdn.com/content/v1/60f1a490a90ed8713c41c36c/1629223610791-LCBJG5451DRKX4WOB4SP/37-design-powers-url-structure.jpeg"
+                        class="rounded-lg"
+                      />
+                    </div>
+                  )}
+
+                  {data.video && (
+                    <div class="group relative">
+                      <button class="absolute w-full h-full bg-gray-900/90 hover:bg-gray-900/50 transition-all duration-300 rounded-lg flex items-center justify-center">
+                        <span class="text-xl font-medium text-white">
+                          <i class="fa-solid fa-video"></i>
+                        </span>
+                        <div
+                          id="download-image"
+                          role="tooltip"
+                          class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+                        >
+                          Download image
+                          <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                      </button>
+                      <img
+                        src="https://i.pinimg.com/736x/2c/c5/16/2cc5167ba9a3df40294330225292005e.jpg"
+                        class="rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="p-5 md:p-20 justify-center flex md:block gap-2  text-gray-800 items-center dark:text-white">
-        <button
-          type="button"
-          className="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          <i className="fa-solid fa-caret-up"></i>
-        </button>
-        <div className="py-2  flex items-center justify-center">0</div>
-        <button
-          type="button"
-          className="relative inline-flex items-center p-3 text-lg font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          <i className="fa-solid fa-caret-down"></i>
-        </button>
       </div>
     </a>
   );

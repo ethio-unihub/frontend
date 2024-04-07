@@ -5,11 +5,40 @@ import { AuthContext } from "../context";
 import { ImageUpload, Notification } from "../components";
 
 export const Header = () => {
-  let { user, logoutUser } = useContext(AuthContext);
+  let { user, logoutUser, loadingMyProfile, myprofile, authTokens } =
+    useContext(AuthContext);
   const [hidden, setHidden] = useState(true);
   const [profile, setProfile] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showNotification, setShowNotification] = useState(true);
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (myprofile) {
+  //     const id = user.user_id;
+  //     const notifications = async () => {
+  //       try {
+  //         const token = authTokens.access;
+  //         const response = await fetch(`${backendUrl}api/profile/${id}`, {
+  //           headers: {
+  //             Authorization: `Alpha ${token}`,
+  //           },
+  //         });
+  //         if (response.ok) {
+  //           const data = await response.json();
+  //           setProfile(data);
+  //         } else {
+  //           console.error("Failed to fetch profile data:", response.statusText);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching profile data:", error);
+  //       } finally {
+  //         setShowNotification(false); // Set loading state to false after fetching
+  //       }
+  //     };
+  //     notifications();
+  //   }
+  // }, [myprofile])
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -324,73 +353,87 @@ export const Header = () => {
                 )}
               </div>
               <div>
-                <button
-                  type="button"
-                  className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                  id="user-menu-button"
-                  aria-expanded="false"
-                  data-dropdown-toggle="user-dropdown"
-                  data-dropdown-placement="bottom"
-                  onClick={() => setProfile(!profile)}
-                >
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="w-8 h-8 rounded-full"
-                    src={Logo}
-                    alt="user photo"
-                  />
-                </button>
-                <div
-                  className={`z-50 ${
-                    profile || "hidden"
-                  } absolute top-12 right-6 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
-                  id="user-dropdown"
-                >
-                  <div className="px-4 py-3">
-                    <span className="block text-sm text-gray-900 dark:text-white">
-                      Bonnie Green
-                    </span>
+                {loadingMyProfile ? (
+                  <button
+                    type="button"
+                    className="animate-pulse text-white p-0 font-medium rounded-lg px-3 me-2 focus:outline-none "
+                  >
+                    <span className="animate-pulse bg-gray-300 dark:bg-gray-700 h-8 w-8 rounded-full block"></span>
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                      id="user-menu-button"
+                      aria-expanded="false"
+                      data-dropdown-toggle="user-dropdown"
+                      data-dropdown-placement="bottom"
+                      onClick={() => setProfile(!profile)}
+                    >
+                      <span className="sr-only">Open user menu</span>
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={
+                          myprofile.profile_pic ? myprofile.profile_pic : Logo
+                        }
+                        alt="user photo"
+                      />
+                    </button>
+                    <div
+                      className={`z-50 ${
+                        profile || "hidden"
+                      } absolute top-12 right-6 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
+                      id="user-dropdown"
+                    >
+                      <div className="px-4 py-3">
+                        <span className="block text-sm text-gray-900 dark:text-white">
+                          {myprofile.user_info.first_name}{" "}
+                          {myprofile.user_info.last_name}
+                        </span>
 
-                    <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                      name@flowbite.com
-                    </span>
-                  </div>
-                  <ul className="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Dashboard
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Settings
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Earnings
-                      </a>
-                    </li>
-                    <li>
-                      <button
-                        type="button"
-                        onClick={logoutUser}
-                        className="block px-4 w-full py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Sign out
-                      </button>
-                    </li>
-                  </ul>
-                </div>
+                        <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                          {myprofile.user_info.email}
+                        </span>
+                      </div>
+                      <ul className="py-2" aria-labelledby="user-menu-button">
+                        <li>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Dashboard
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Settings
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Earnings
+                          </a>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            onClick={logoutUser}
+                            className="block px-4 w-full py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Sign out
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ) : (

@@ -18,6 +18,35 @@ export const AuthProvider = ({ children }) => {
       ? jwtDecode(localStorage.getItem("authTokens"))
       : null
   );
+  const [profile, setProfile] = useState(null);
+
+  const [loadingMyProfile, setLoadingMyProfile] = useState(true);
+  useEffect(() => {
+    if (user) {
+      const id = user.user_id;
+      const getProfile = async () => {
+        try {
+          const token = authTokens.access;
+          const response = await fetch(`${backendUrl}api/profile/${id}`, {
+            headers: {
+              Authorization: `Alpha ${token}`,
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setProfile(data);
+          } else {
+            console.error("Failed to fetch profile data:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error fetching profile data:", error);
+        } finally {
+          setLoadingMyProfile(false); // Set loading state to false after fetching
+        }
+      };
+      getProfile();
+    }
+  }, [user]);
   const [loading, setLoading] = useState(true);
 
   const { addMessage } = useContext(MessageContext);
@@ -292,6 +321,8 @@ export const AuthProvider = ({ children }) => {
     resetPassword: resetPassword,
     registerUser: registerUser,
     activateAccount: activateAccount,
+    myprofile: profile,
+    loadingMyProfile: loadingMyProfile,
   };
 
   useEffect(() => {

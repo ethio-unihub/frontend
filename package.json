@@ -15,6 +15,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@tanstack/react-query": "^5.28.9",
     "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
     "flowbite": "^2.3.0",
     "flowbite-typography": "^1.0.3",
     "jwt-decode": "^4.0.0",
