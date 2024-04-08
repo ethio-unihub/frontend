@@ -12,7 +12,6 @@ export const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
- 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
@@ -218,7 +217,7 @@ export const Header = () => {
                 }
                 end
               >
-                For You
+                Questions
               </NavLink>
             </li>
             <li>
@@ -228,7 +227,7 @@ export const Header = () => {
                   isActive ? activeClass : inactiveClass
                 }
               >
-                Following
+                Files
               </NavLink>
             </li>
           </ul>

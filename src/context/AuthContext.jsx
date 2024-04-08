@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
       ? jwtDecode(localStorage.getItem("authTokens"))
       : null
   );
-  const [profile, setProfile] = useState(null);
+  const [myprofile, setProfile] = useState(null);
 
   const [loadingMyProfile, setLoadingMyProfile] = useState(true);
   useEffect(() => {
@@ -321,7 +321,7 @@ export const AuthProvider = ({ children }) => {
     resetPassword: resetPassword,
     registerUser: registerUser,
     activateAccount: activateAccount,
-    myprofile: profile,
+    myprofile: myprofile,
     loadingMyProfile: loadingMyProfile,
   };
 

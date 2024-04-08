@@ -83,7 +83,7 @@ export const Notification = () => {
           aria-labelledby="dropdownNotificationButton"
         >
           <div className="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
-            <b>{notifications.count}</b> Notifications
+            <b>{notifications && notifications.count}</b> Notifications
           </div>
           <div className="divide-y divide-gray-100 dark:divide-gray-700">
             {loading && !notifications ? (
