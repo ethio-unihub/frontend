@@ -1,5 +1,4 @@
-import { LeftBar, Leaderboard } from "../../components";
-import { ForYou } from "./ForYou";
+import { LeftBar, ForYou, Leaderboard } from "./index";
 
 export const Home = () => {
   return (
