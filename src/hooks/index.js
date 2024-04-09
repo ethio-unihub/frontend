@@ -1,1 +1,1 @@
-export { usePostFetch } from "./usePostFetch";
+export { useFetchPosts } from "./post/useFetchPost";
