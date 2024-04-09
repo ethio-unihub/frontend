@@ -10,7 +10,7 @@ export const Home = () => {
           <ForYou />
         </div>
       </div>
-      <div className="fixed right-4 hidden z-0 lg:block">
+      <div className="md:block hidden">
         <Leaderboard />
       </div>
     </div>

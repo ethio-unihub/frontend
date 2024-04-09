@@ -1,72 +1,68 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useLeaderboard } from "../../hooks";
+import { AuthContext } from "../../context/";
+import Logo from "../../assets/logo.png";
 
 export const Leaderboard = () => {
+  const [loading, setLoading] = useState(true);
+  const { myprofile } = useContext(AuthContext);
+  const leaderboard = useLeaderboard();
+
+  useEffect(() => {
+    if (leaderboard.length > 0) {
+      setLoading(false);
+    }
+  }, [leaderboard]);
   return (
-    <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
-      <div class="bg-gray-100 py-2 px-4">
-        <h2 class="text-xl font-semibold text-gray-800">Top Users</h2>
+    <div class="bg-white dark:bg-gray-900 shadow-md rounded-md min-w-[400px] overflow-hidden mx-auto mt-16">
+      <div class="bg-gray-100 dark:bg-gray-700  py-2 px-4">
+        <h2 class="text-xl font-semibold dark:text-white text-gray-800">
+          Top Performers
+        </h2>
       </div>
-      <ul class="divide-y divide-gray-200">
-        <li class="flex items-center py-4 px-6">
-          <span class="text-gray-700 text-lg font-medium mr-4">1.</span>
-          <img
-            class="w-12 h-12 rounded-full object-cover mr-4"
-            src="https://randomuser.me/api/portraits/women/72.jpg"
-            alt="User avatar"
-          />
-          <div class="flex-1">
-            <h3 class="text-lg font-medium text-gray-800">Emily Jones</h3>
-            <p class="text-gray-600 text-base">1234 points</p>
-          </div>
-        </li>
-        <li class="flex items-center py-4 px-6">
-          <span class="text-gray-700 text-lg font-medium mr-4">2.</span>
-          <img
-            class="w-12 h-12 rounded-full object-cover mr-4"
-            src="https://randomuser.me/api/portraits/men/40.jpg"
-            alt="User avatar"
-          />
-          <div class="flex-1">
-            <h3 class="text-lg font-medium text-gray-800">David Lee</h3>
-            <p class="text-gray-600 text-base">987 points</p>
-          </div>
-        </li>
-        <li class="flex items-center py-4 px-6">
-          <span class="text-gray-700 text-lg font-medium mr-4">3.</span>
-          <img
-            class="w-12 h-12 rounded-full object-cover mr-4"
-            src="https://randomuser.me/api/portraits/women/54.jpg"
-            alt="User avatar"
-          />
-          <div class="flex-1">
-            <h3 class="text-lg font-medium text-gray-800">Sophia Williams</h3>
-            <p class="text-gray-600 text-base">876 points</p>
-          </div>
-        </li>
-        <li class="flex items-center py-4 px-6">
-          <span class="text-gray-700 text-lg font-medium mr-4">4.</span>
-          <img
-            class="w-12 h-12 rounded-full object-cover mr-4"
-            src="https://randomuser.me/api/portraits/men/83.jpg"
-            alt="User avatar"
-          />
-          <div class="flex-1">
-            <h3 class="text-lg font-medium text-gray-800">Michael Chen</h3>
-            <p class="text-gray-600 text-base">765 points</p>
-          </div>
-        </li>
-        <li class="flex items-center py-4 px-6">
-          <span class="text-gray-700 text-lg font-medium mr-4">5.</span>
-          <img
-            class="w-12 h-12 rounded-full object-cover mr-4"
-            src="https://randomuser.me/api/portraits/women/17.jpg"
-            alt="User avatar"
-          />
-          <div class="flex-1">
-            <h3 class="text-lg font-medium text-gray-800">Mia Davis</h3>
-            <p class="text-gray-600 text-base">654 points</p>
-          </div>
-        </li>
+      <ul class="divide-y dark:divide-gray-600 divide-gray-200">
+        {loading
+          ? [1, 2, 3, 4, 5].map((item, index) => (
+              <li
+                key={index}
+                className="flex items-center py-4 px-6 animate-pulse"
+              >
+                <span className="dark:text-white text-gray-700 text-lg font-medium mr-4">
+                  {item}.
+                </span>
+                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-medium dark:text-white text-gray-800 bg-gray-300 h-6 w-4/5 mb-2"></h3>
+                  <p className="dark:text-white text-gray-600 text-base bg-gray-300 h-4 w-1/2"></p>
+                </div>
+              </li>
+            ))
+          : leaderboard.map(
+              (lead, index) =>
+                (index < 5 || (myprofile && lead.id === myprofile.id)) && (
+                  <li key={index} class="flex items-center py-4 px-6">
+                    <span class="dark:text-white text-gray-700 text-lg font-medium mr-4">
+                      {index + 1}.
+                    </span>
+                    <img
+                      class="w-12 h-12 rounded-full object-cover mr-4"
+                      src={lead.profile_pic ? lead.profile_pic : Logo}
+                      alt="User avatar"
+                    />
+                    <div class="flex-1">
+                      <h3 class="text-lg font-medium dark:text-white text-gray-800">
+                        {lead.user.first_name} {lead.user.last_name}
+                      </h3>
+                      <p class="dark:text-white text-sm text-gray-600">
+                        @{lead.user.username}
+                      </p>
+                    </div>
+                    <span class="dark:text-white text-gray-700 text-lg font-medium mr-4">
+                      {lead.total_upvotes - lead.total_downvotes} points
+                    </span>
+                  </li>
+                )
+            )}
       </ul>
     </div>
   );

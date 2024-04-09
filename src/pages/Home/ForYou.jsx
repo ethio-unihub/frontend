@@ -67,7 +67,7 @@ export const ForYou = () => {
               }`}
               onClick={() => handleHashtagClick(hash.id)}
             >
-              {hash.name}
+              #{hash.slug}
             </button>
           ))}
       </div>
