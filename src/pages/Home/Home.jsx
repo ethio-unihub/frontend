@@ -1,4 +1,4 @@
-import { LeftBar, Table } from "../../components";
+import { LeftBar, Leaderboard } from "../../components";
 import { ForYou } from "./ForYou";
 
 export const Home = () => {
@@ -11,7 +11,7 @@ export const Home = () => {
         </div>
       </div>
       <div className="fixed right-4 hidden z-0 lg:block">
-        <Table />
+        <Leaderboard />
       </div>
     </div>
   );
