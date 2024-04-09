@@ -12,7 +12,7 @@ export const useHashtag = () => {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setHashtag(data);
+        setHashtag(data.results);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

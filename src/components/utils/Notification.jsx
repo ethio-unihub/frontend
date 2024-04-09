@@ -34,7 +34,6 @@ export const Notification = () => {
           if (response.ok) {
             const data = await response.json();
             setNotifications(data);
-            console.log(data);
           } else {
             console.error(
               "Failed to fetch notifications:",

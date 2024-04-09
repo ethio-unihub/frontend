@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHashtag } from "../../hooks";
 
 export const LeftBar = () => {
+  const [loading, setLoading] = useState(true);
   const [side, setSide] = useState(true);
   const communities = useHashtag();
   console.log(communities);
+  useEffect(() => {
+    if (communities.length > 0) {
+      setLoading(false);
+    }
+  }, [communities]);
   return (
     <>
       <button
@@ -43,44 +49,42 @@ export const LeftBar = () => {
             <h2 className="text-lg font-semibold mb-4">Popular communities</h2>
 
             <ul className="space-y-2">
-              {[1,2,3,4].map((k) => (
-              <li className="pt-3 pb-0 sm:pt-4 animate-pulse" key={k}>
-                <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                      <span className="bg-gray-300 h-4 w-20 block"></span>
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                    <span className="bg-gray-300 h-4 w-16 block"></span>
-                  </div>
-                </div>
-              </li>
-              ))}
-              {/* {communities.map((community, index) => (
-                <li key={index} className="pt-3 pb-0 sm:pt-4">
-                  <div className="flex items-center space-x-4 rtl:space-x-reverse">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="w-8 h-8 rounded-full"
-                        src={ppimage}
-                        alt={community.name}
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        {community.name}
-                      </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        {community.Email}
-                      </p>
-                    </div>
-                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      {community.subscribers.toLocaleString()}
-                    </div>
-                  </div>
-                </li>
-              ))} */}
+              {loading
+                ? [1, 2, 3, 4].map((k) => (
+                    <li className="pt-3 pb-0 sm:pt-4 animate-pulse" key={k}>
+                      <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            <span className="bg-gray-300 h-4 w-20 block"></span>
+                          </p>
+                        </div>
+                        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                          <span className="bg-gray-300 h-4 w-16 block"></span>
+                        </div>
+                      </div>
+                    </li>
+                  ))
+                : communities.map(
+                    (community, index) =>
+                      index < 5 && (
+                        <li key={index} className="pt-3 pb-0 sm:pt-4">
+                          <div className="flex items-center space-x-4 rtl:space-x-reverse">
+                            <div className="flex-shrink-0">#</div>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {community.name}
+                              </p>
+                              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {/* {community.Email} */}
+                              </p>
+                            </div>
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                              {community.subscribers.length} subs
+                            </div>
+                          </div>
+                        </li>
+                      )
+                  )}
             </ul>
           </div>
           <div>

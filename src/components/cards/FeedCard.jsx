@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import Logo from "../../assets/logo.png";
 
 const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
@@ -101,7 +102,11 @@ export const FeedCard = ({ data }) => {
               <div className="flex-shrink-0">
                 <img
                   className="w-8 h-8 rounded-full"
-                  src={`${backendUrl}${data.owner.profile_pic}`}
+                  src={
+                    data.owner.prifle_pic
+                      ? `${backendUrl}${data.owner.profile_pic}`
+                      : Logo
+                  }
                   alt="Neil image"
                 />
               </div>
