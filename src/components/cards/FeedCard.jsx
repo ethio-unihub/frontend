@@ -1,16 +1,44 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
 import Logo from "../../assets/logo.png";
+import { AuthContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 export const FeedCard = ({ data }) => {
+  const { user, myprofile } = useContext(AuthContext);
   const [more, setMore] = useState(false);
   const addedDate = new Date(data.added_time);
   const timeAgo = formatDistanceToNow(addedDate, { addSuffix: true });
+  const navigate = useNavigate();
 
+  const upvote = () => {
+    if (user) {
+    } else {
+      navigate("/login");
+    }
+  };
+  const downvote = () => {
+    if (user) {
+    } else {
+      navigate("/login");
+    }
+  };
+  const save = () => {
+    if (user) {
+    } else {
+      navigate("/login");
+    }
+  };
+  const report = () => {
+    if (user) {
+    } else {
+      navigate("/login");
+    }
+  };
   return (
-    <a href="#">
+    <div>
       <div className="mt-5 max-w-xs flex flex-col bg-white border border-t-4 border-t-blue-600 shadow-sm rounded-xl dark:bg-slate-900 dark:border-gray-700 dark:border-t-blue-500 dark:shadow-slate-700/[.7]       min-w-full hover:bg-gray-100 dark:hover:bg-gray-700">
         <div className="p-4 md:p-5">
           <h3 className="text-lg font-bold text-gray-800 dark:text-white">
@@ -20,6 +48,7 @@ export const FeedCard = ({ data }) => {
             <div className="flex flex-col items-center text-center justify-center dark:text-white">
               <button
                 type="button"
+                onClick={upvote}
                 className="text-white p-0  bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg px-3  me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
                 <i className="fa-solid fa-caret-up text-2xl"></i>
@@ -29,6 +58,7 @@ export const FeedCard = ({ data }) => {
               </b>
               <button
                 type="button"
+                onClick={downvote}
                 className="text-white p-0  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
                 <i className="fa-solid fa-caret-down text-2xl"></i>
@@ -56,7 +86,10 @@ export const FeedCard = ({ data }) => {
                   </span>
                 )}
               </i>
-              <i className="fa-regular fa-floppy-disk text-2xl dark:text-white text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2">
+              <i
+                onClick={save}
+                className="fa-regular fa-floppy-disk cursor-pointer text-2xl dark:text-white text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2"
+              >
                 {data.save_count > 0 && (
                   <span className="absolute top-[-6px] right-[-16px] -mt-2 -ml-2">
                     <div className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white dark:bg-white dark:text-gray-800">
@@ -66,7 +99,7 @@ export const FeedCard = ({ data }) => {
                 )}
               </i>
               <i className="fa-regular fa-share-from-square dark:text-white text-2xl text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2"></i>
-              <i className=" dark:text-white text-2xl text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2">
+              <i className=" cursor-pointer dark:text-white text-2xl text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2">
                 <span
                   className="material-symbols-outlined"
                   onClick={() => setMore(!more)}
@@ -83,13 +116,39 @@ export const FeedCard = ({ data }) => {
                       aria-labelledby="dropdownMenuIconButton"
                     >
                       <li>
-                        <a
-                          href="#"
-                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                        <button
+                          type="button"
+                          onClick={report}
+                          className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           Report
-                        </a>
+                        </button>
                       </li>
+                      {user &&
+                        myprofile &&
+                        myprofile.user_info.username ===
+                          data.owner.username && (
+                          <>
+                            <li>
+                              <button
+                                type="button"
+                                onClick={report}
+                                className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              >
+                                Edit
+                              </button>
+                            </li>
+                            <li>
+                              <button
+                                type="button"
+                                onClick={report}
+                                className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                              >
+                                Delete
+                              </button>
+                            </li>
+                          </>
+                        )}
                     </ul>
                   </div>
                 )}
@@ -180,6 +239,6 @@ export const FeedCard = ({ data }) => {
           </div>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
