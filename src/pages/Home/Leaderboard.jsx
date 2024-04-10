@@ -59,7 +59,7 @@ export const Leaderboard = () => {
                       </p>
                     </div>
                     <span className="dark:text-white text-gray-700 text-lg font-medium mr-4">
-                      {lead.total_upvotes - lead.total_downvotes} points
+                      {lead.total_upvotes - lead.total_downvotes} votes
                     </span>
                   </li>
                 )

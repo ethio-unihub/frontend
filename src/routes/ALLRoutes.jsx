@@ -18,7 +18,7 @@ export const ALLRoutes = () => {
 
   return (
     <div className=" overflow-x-hidden dark:bg-slate-800">
-      <div className="absolute top-[100px] left-1/2 z-100">
+      <div className="fixed top-[100px] left-1/2 z-[100]">
         {messages.map((msg, index) => (
           <Message
             key={index}

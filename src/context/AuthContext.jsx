@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
 
   const [loadingMyProfile, setLoadingMyProfile] = useState(true);
   useEffect(() => {
-    if (authTokens) {
+    if (authTokens && user) {
       const id = user.user_id;
       const getProfile = async () => {
         try {

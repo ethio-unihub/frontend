@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context";
 import { useHashtagPosts, useFetchPosts } from "../../hooks/";
 import { FeedCard, QuestionCard } from "../../components";
@@ -9,6 +9,7 @@ export const ForYou = () => {
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const [selectedHashtagId, setSelectedHashtagId] = useState(null);
   const [fetchingPosts, setFetchingPosts] = useState(false);
+  const [sortedPosts, setSortedPosts] = useState([]);
 
   const {
     data: posts,
@@ -42,6 +43,18 @@ export const ForYou = () => {
     }
   }, [fetchingPosts, backendUrl]);
 
+  useEffect(() => {
+    if (posts) {
+      // Sort the posts based on the difference between upvotes and downvotes
+      const sorted = [...posts].sort((a, b) => {
+        const scoreA = a.upvote.length - a.downvote.length;
+        const scoreB = b.upvote.length - b.downvote.length;
+        return scoreB - scoreA;
+      });
+      setSortedPosts(sorted);
+    }
+  }, [posts]);
+
   return (
     <div className="flex gap-12">
       <div className="scroll md:min-w-[700px] md:max-w-[800px]">
@@ -57,7 +70,8 @@ export const ForYou = () => {
           >
             All Hashtags
           </button>
-          {user && myprofile &&
+          {user &&
+            myprofile &&
             myprofile.subscribed_hashtags.map((hash, index) => (
               <button
                 key={index}
@@ -74,7 +88,7 @@ export const ForYou = () => {
             ))}
         </div>
         <div>
-          {posts.map((post, index) => (
+          {sortedPosts.map((post, index) => (
             <FeedCard key={index} data={post} />
           ))}
         </div>

@@ -233,7 +233,7 @@ export const Header = () => {
           </ul>
         </div>
         <div className="flex items-center pt-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {user ? (
+          {user && myprofile ? (
             <div className="flex gap-4 justify-center items-center">
               <Notification />
               <div>
@@ -325,7 +325,7 @@ export const Header = () => {
                 )}
               </div>
               <div>
-                {loadingMyProfile ? (
+                {loadingMyProfile && !myprofile ? (
                   <button
                     type="button"
                     className="animate-pulse text-white p-0 font-medium rounded-lg px-3 me-2 focus:outline-none "
