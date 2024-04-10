@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import Terms from "../pages/Terms";
-// import Abouts from "../pages/About";
 import {
   Home,
   Register,
@@ -11,6 +9,7 @@ import {
   ActivateAccount,
   Post,
 } from "../pages/";
+import { Terms, About, Help, Privacy } from "../pages/Static";
 import { Message } from "../components";
 import { MessageContext } from "../context";
 
@@ -41,8 +40,12 @@ export const ALLRoutes = () => {
           />
           <Route path="/activate/:uid/:token" element={<ActivateAccount />} />
           <Route path="/register" element={<Register />} />
+
+          {/* static routes */}
           <Route path="/terms" element={<Terms />} />
-          {/* <Route path="/About" element={<Abouts />} /> */}
+          <Route path="/help" element={<Help />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/about-us" element={<About />} />
         </Routes>
       </div>
     </div>

@@ -1,7 +1,4 @@
-import React from 'react'
-
-
-const PrivacyPolicy = () => {
+export const Terms = () => {
   return (
     <div>
       <header>
@@ -39,5 +36,3 @@ const PrivacyPolicy = () => {
     </div>
   );
 };
-
-export default PrivacyPolicy;

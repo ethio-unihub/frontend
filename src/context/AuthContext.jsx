@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       };
       getProfile();
     }
-  }, [authTokens]);
+  }, [authTokens,user]);
   const [loading, setLoading] = useState(true);
 
   const { addMessage } = useContext(MessageContext);

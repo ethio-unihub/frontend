@@ -5,7 +5,6 @@ import Logo from "../../assets/logo.png";
 const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 export const FeedCard = ({ data }) => {
-  // console.log(data);
   const [more, setMore] = useState(false);
   const addedDate = new Date(data.added_time);
   const timeAgo = formatDistanceToNow(addedDate, { addSuffix: true });

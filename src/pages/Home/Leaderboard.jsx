@@ -5,7 +5,7 @@ import Logo from "../../assets/logo.png";
 
 export const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
-  const { myprofile } = useContext(AuthContext);
+  const { myprofile, user } = useContext(AuthContext);
   const leaderboard = useLeaderboard();
 
   useEffect(() => {
@@ -39,7 +39,8 @@ export const Leaderboard = () => {
             ))
           : leaderboard.map(
               (lead, index) =>
-                (index < 5 || (myprofile && lead.id === myprofile.id)) && (
+                (index < 5 ||
+                  (user && myprofile && lead.id === myprofile.id)) && (
                   <li key={index} className="flex items-center py-4 px-6">
                     <span className="dark:text-white text-gray-700 text-lg font-medium mr-4">
                       {index + 1}.
