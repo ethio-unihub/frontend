@@ -1,9 +1,15 @@
+import { usePostDetail } from "../../hooks";
 import { RelatedPost } from "./RelatedPost";
+import { useParams } from "react-router-dom";
 
 export const Post = () => {
+  const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+  const { slug } = useParams();
+  const { post } = usePostDetail(slug, backendUrl);
+  console.log(post);
   return (
     <div className="flex gap-8">
-      <RelatedPost />
+      {/* <RelatedPost /> */}
       <main className="pt-8 pb-16 lg:pt-16 lg:pb-24  antialiased">
         <div className="flex justify-between px-4 mx-auto max-w-screen-xl ">
           <div className="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">

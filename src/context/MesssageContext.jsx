@@ -18,7 +18,7 @@ export const MessageProvider = ({ children }) => {
   const clearMessages = () => {
     setMessages([]);
   };
-
+  
   const deleteMessagesWithDelay = () => {
     setTimeout(() => {
       for (let i = 0; i < messages.length; i++) {
@@ -26,7 +26,8 @@ export const MessageProvider = ({ children }) => {
           deleteMessage(0);
         }, i * 3000);
       }
-    }, 20000);
+      setMessages([]);
+    }, 15000);
   };
 
   useEffect(() => {

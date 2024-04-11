@@ -12,6 +12,7 @@ import {
 import { Terms, About, Help, Privacy } from "../pages/Static";
 import { Message } from "../components";
 import { MessageContext } from "../context";
+import CommunityPage from "../pages/CommunityPage/CommunityPage";
 
 export const ALLRoutes = () => {
   const { messages } = useContext(MessageContext);
@@ -32,6 +33,8 @@ export const ALLRoutes = () => {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/question/:slug" element={<Post />} />
+
+          {/* auth routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
