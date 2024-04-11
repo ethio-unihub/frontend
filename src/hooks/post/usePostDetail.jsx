@@ -13,13 +13,13 @@ export const usePostDetail = (slug, backendUrl) => {
           if (responseData.results.length > 0) {
             setPost(responseData.results[0]); // Assuming the first item is the post detail
           } else {
-            console.log({ type: "error", text: "Post not found" });
+            setPost({ type: "error", text: "Post not found" });
           }
         } else {
-          console.log({ type: "error", text: "Failed to fetch post details" });
+          setPost({ type: "error", text: "Failed to fetch post details" });
         }
       } catch (error) {
-        console.log({ type: "error", text: error.message });
+        setPost({ type: "error", text: error.message });
       }
     };
 
