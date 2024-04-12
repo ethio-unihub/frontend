@@ -1,116 +1,24 @@
-export const RelatedPost = () => {
+import { RelatedCard, RelatedLoading } from "../../components";
+import { useRelated } from "../../hooks";
+
+export const RelatedPost = ({ data, url }) => {
+  const { post } = useRelated(data.id, url);
+  console.log(post);
   return (
-    <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700 p-8">
-      <li className="pb-3 sm:pb-4">
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <div className="flex-shrink-0">
-            <img
-              className="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-1.jpg"
-              alt="Neil image"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              Neil Sims
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              email@flowbite.com
-            </p>
-          </div>
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            $320
-          </div>
-        </div>
-      </li>
-      <li className="py-3 sm:py-4">
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <div className="flex-shrink-0">
-            <img
-              className="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-3.jpg"
-              alt="Neil image"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              Bonnie Green
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              email@flowbite.com
-            </p>
-          </div>
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            $3467
-          </div>
-        </div>
-      </li>
-      <li className="py-3 sm:py-4">
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <div className="flex-shrink-0">
-            <img
-              className="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-2.jpg"
-              alt="Neil image"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              Michael Gough
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              email@flowbite.com
-            </p>
-          </div>
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            $67
-          </div>
-        </div>
-      </li>
-      <li className="py-3 sm:py-4">
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <div className="flex-shrink-0">
-            <img
-              className="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-5.jpg"
-              alt="Neil image"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              Thomas Lean
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              email@flowbite.com
-            </p>
-          </div>
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            $2367
-          </div>
-        </div>
-      </li>
-      <li className="pt-3 pb-0 sm:pt-4">
-        <div className="flex items-center space-x-4 rtl:space-x-reverse">
-          <div className="flex-shrink-0">
-            <img
-              className="w-8 h-8 rounded-full"
-              src="/docs/images/people/profile-picture-4.jpg"
-              alt="Neil image"
-            />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-              Lana Byrd
-            </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              email@flowbite.com
-            </p>
-          </div>
-          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-            $367
-          </div>
-        </div>
-      </li>
-    </ul>
+    <div className=" overflow-x-hidden overflow-y-scroll h-screen p-2 fixed">
+      <h1 className="text-2xl text-gray-700 dark:text-white">
+        Related Questions
+      </h1>
+
+      {post.length === 0 ? (
+        <>
+          {[0,1,2,3,4,5,6,7,8,9,10].map((a) =>
+          <RelatedLoading key={a} />)}
+        </>
+      ) : (
+        post.map((a,index) => <RelatedCard key={index} data={a} />)
+        
+      )}
+    </div>
   );
 };

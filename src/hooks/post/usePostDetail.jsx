@@ -10,6 +10,7 @@ export const usePostDetail = (slug, backendUrl) => {
         const responseData = await response.json();
 
         if (response.ok) {
+          setPost([])
           if (responseData.results.length > 0) {
             setPost(responseData.results[0]); // Assuming the first item is the post detail
           } else {

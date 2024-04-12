@@ -5,3 +5,6 @@ export { Message } from "./utils/Message";
 export { ImageUpload } from "./utils/ImageUploader";
 export { Notification } from "./utils/Notification";
 export { QuestionCard } from "./loading/QuestionCard";
+export { CommentCard } from "./cards/CommentCard";
+export { RelatedCard } from "./cards/RelatedCard";
+export { RelatedLoading } from "./loading/RelatedLoading";
