@@ -9,7 +9,6 @@ export const AboutPost = ({ post }) => {
   const [loading, setLoading] = useState([false, false, false, false, false]);
   const { upvote, downvote, save, clear } = usePost(post, backendUrl);
   const navigate = useNavigate();
-  console.log(post);
   const svg = (
     <svg
       aria-hidden="true"

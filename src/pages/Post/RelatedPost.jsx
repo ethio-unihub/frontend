@@ -3,7 +3,6 @@ import { useRelated } from "../../hooks";
 
 export const RelatedPost = ({ data, url }) => {
   const { post } = useRelated(data.id, url);
-  console.log(post);
   return (
     <div className=" overflow-x-hidden overflow-y-scroll h-screen p-2 fixed">
       <h1 className="text-2xl text-gray-700 dark:text-white">

@@ -94,62 +94,6 @@ export const CommentCard = () => {
             <p className="text-sm font-normal text-gray-900 dark:text-white">
               This is the new office{" "}
             </p>
-            <div className="flex flex-col max-w-full m-auto">
-              <div className="flex overflow-x-scroll py-4 hide-scroll-bar">
-                <div className="flex flex-nowrap  ml-10">
-                  <a
-                    // key={index}
-                    // href={p.images}
-                    target="_blank"
-                    className="inline-block px-3"
-                  >
-                    <img
-                      src="https://ichef.bbci.co.uk/news/999/cpsprodpb/15951/production/_117310488_16.jpg"
-                      className="w-56 h-56 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                    />
-                  </a>
-                </div>
-                <div className="flex flex-nowrap  ml-10">
-                  <a
-                    // key={index}
-                    // href={p.images}
-                    target="_blank"
-                    className="inline-block px-3"
-                  >
-                    <img
-                      src="https://ichef.bbci.co.uk/news/999/cpsprodpb/15951/production/_117310488_16.jpg"
-                      className="w-56 h-56 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                    />
-                  </a>
-                </div>
-                <div className="flex flex-nowrap  ml-10">
-                  <a
-                    // key={index}
-                    // href={p.images}
-                    target="_blank"
-                    className="inline-block px-3"
-                  >
-                    <img
-                      src="https://ichef.bbci.co.uk/news/999/cpsprodpb/15951/production/_117310488_16.jpg"
-                      className="w-56 h-56 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                    />
-                  </a>
-                </div>
-                <div className="flex flex-nowrap  ml-10">
-                  <a
-                    // key={index}
-                    // href={p.images}
-                    target="_blank"
-                    className="inline-block px-3"
-                  >
-                    <img
-                      src="https://ichef.bbci.co.uk/news/999/cpsprodpb/15951/production/_117310488_16.jpg"
-                      className="w-56 h-56 max-w-xs overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
           </div>
           <div className="flex gap-8">
             <span className="text-sm cursor-pointer font-normal text-gray-500 dark:text-gray-400">

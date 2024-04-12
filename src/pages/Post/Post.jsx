@@ -122,7 +122,7 @@ export const Post = () => {
             </div>
           )}
         </main>
-        <CommentSection />
+       {post && <CommentSection id={post.id} count={post.comments_count} />}
       </div>
       {post ? (
         <AboutPost post={post} />
