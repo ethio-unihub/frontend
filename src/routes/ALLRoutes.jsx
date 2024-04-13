@@ -12,6 +12,7 @@ import {
   Profile,
   Tags,
   Search,
+  Files
 } from "../pages/";
 import { Terms, About, Help, Privacy } from "../pages/Static";
 import { Message, HashtagCard } from "../components";
@@ -54,6 +55,9 @@ export const ALLRoutes = () => {
           <Route path="/tags/:id" element={<Tags />} />
           <Route path="/hashtags/:id" element={<HashtagCard />} />
           <Route path="/:username" element={<Profile />} />
+
+          {/* files */}
+          <Route path="/files" element={<Files />} />
 
           {/* static routes */}
           <Route path="/terms" element={<Terms />} />
