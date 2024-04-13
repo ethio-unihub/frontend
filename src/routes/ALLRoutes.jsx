@@ -8,6 +8,7 @@ import {
   ResetPassword,
   ActivateAccount,
   Post,
+  Profile,
 } from "../pages/";
 import { Terms, About, Help, Privacy } from "../pages/Static";
 import { Message } from "../components";
@@ -43,6 +44,9 @@ export const ALLRoutes = () => {
           />
           <Route path="/activate/:uid/:token" element={<ActivateAccount />} />
           <Route path="/register" element={<Register />} />
+
+          {/* profile */}
+          <Route path="/:username" element={<Profile />} />
 
           {/* static routes */}
           <Route path="/terms" element={<Terms />} />

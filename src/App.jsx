@@ -7,7 +7,7 @@ function App() {
   return (
     <MessageProvider>
       <AuthProvider>
-        <div>
+        <div className="dark:bg-gray-800 min-h-screen">
           <Header />
           <ALLRoutes />
           {/* <Footer/> */}

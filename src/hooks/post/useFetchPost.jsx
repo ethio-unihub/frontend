@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useFetchPosts = (backendUrl) => {
+export const useFetchPosts = (url) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -9,7 +9,7 @@ export const useFetchPosts = (backendUrl) => {
   const fetchPost = async (pageNumber) => {
     try {
       setLoading(true);
-      let response = await fetch(`${backendUrl}api/posts/?page=${pageNumber}`);
+      let response = await fetch(`${url}?page=${pageNumber}`);
       let get = await response.json();
       if (pageNumber === 1) {
         setData([]);
@@ -26,12 +26,12 @@ export const useFetchPosts = (backendUrl) => {
 
   useEffect(() => {
     fetchPost(page);
-  }, [backendUrl, page]);
+  }, [url, page]);
 
   const loadMore = () => {
     const nextPage = page + 1;
     fetchPost(nextPage);
   };
 
-  return { data, setData, loading, hasMoreData, loadMore };
+  return { data, setData, loading, hasMoreData, loadMore, fetchPost };
 };
