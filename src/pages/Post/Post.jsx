@@ -23,9 +23,9 @@ export const Post = () => {
         </div>
       )}
       <div>
-        <main className="pt-8 pb-16 lg:pt-16 lg:pb-24  antialiased">
+        <main className="pt-8  pb-16 lg:pt-16 lg:pb-24  antialiased">
           {!main ? (
-            <div className="flex flex-col gap-8 justify-center w-full h-full items-center">
+            <div className="flex absolute flex-col gap-8 justify-center w-full h-full items-center">
               <div className="relative flex justify-center items-center">
                 <div
                   className={`absolute ${
@@ -122,7 +122,7 @@ export const Post = () => {
             </div>
           )}
         </main>
-       {post && <CommentSection id={post.id} count={post.comments_count} />}
+        {post && <CommentSection id={post.id} />}
       </div>
       {post ? (
         <AboutPost post={post} />

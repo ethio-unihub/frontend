@@ -9,3 +9,5 @@ export { useLeaderboard } from "./leaderboard/useLeaderboard";
 export { useHashtag } from "./community/useHashtag";
 
 export { useComment } from "./comment/useComment";
+
+export { ScrollTop } from "./useScrollTop";
