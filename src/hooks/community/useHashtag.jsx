@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export const useHashtag = () => {
-  const [hashtag, setHashtag] = useState([]);
+  const [hashtag, setHashtag] = useState(null);
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export const useHashtag = () => {
           throw new Error("Failed to fetch data");
         }
         const data = await response.json();
-        setHashtag(data.results);
+        setHashtag(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }

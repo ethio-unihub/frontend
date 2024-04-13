@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useHashtag } from "../../hooks";
 import { Link } from "react-router-dom";
 
 export const LeftBar = () => {
   const [loading, setLoading] = useState(true);
   const [side, setSide] = useState(true);
-  const communities = useHashtag();
+  const hashtag = useHashtag();
+
   useEffect(() => {
-    if (communities.length > 0) {
+    if (hashtag !== null) {
       setLoading(false);
     }
-  }, [communities]);
+  }, [hashtag]);
+
   return (
     <>
       <button
@@ -64,7 +66,8 @@ export const LeftBar = () => {
                       </div>
                     </li>
                   ))
-                : communities.map(
+                : hashtag &&
+                  hashtag.map(
                     (community, index) =>
                       index < 5 && (
                         <li key={index} className="pt-3 pb-0 sm:pt-4">
@@ -82,7 +85,9 @@ export const LeftBar = () => {
                               </p>
                             </div>
                             <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                              {community.subscribers.length} subs
+                              {community.subscribers &&
+                                community.subscribers.length}{" "}
+                              subs
                             </div>
                           </a>
                         </li>
@@ -91,7 +96,7 @@ export const LeftBar = () => {
             </ul>
           </div>
           <div>
-            <h2 className="text-lg font-semibold mb-4">Informantion</h2>
+            <h2 className="text-lg font-semibold mb-4">Information</h2>
             <ul>
               <li>
                 <Link

@@ -10,9 +10,10 @@ import {
   Post,
   Hashtag,
   Profile,
+  Tags,
 } from "../pages/";
 import { Terms, About, Help, Privacy } from "../pages/Static";
-import { Message } from "../components";
+import { Message, HashtagCard } from "../components";
 import { MessageContext } from "../context";
 import CommunityPage from "../pages/CommunityPage/CommunityPage";
 
@@ -48,7 +49,8 @@ export const ALLRoutes = () => {
 
           {/* profile */}
           <Route path="/hashtags" element={<Hashtag />} />
-          <Route path="/hashtags/:id" element={<Hashtag />} />
+          <Route path="/tags/:id" element={<Tags />} />
+          <Route path="/hashtags/:id" element={<HashtagCard />} />
           <Route path="/:username" element={<Profile />} />
 
           {/* static routes */}
