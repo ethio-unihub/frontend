@@ -18,7 +18,7 @@ export const CommentSection = ({ id }) => {
   }, [comment]);
 
   return (
-    <div className="py-8 w-full">
+    <div className="py-8 w-full h-full">
       <AddComment id={id} />
       <h1 className="m-8 text-2xl text-gray-600 dark:text-white">
         Answers ({comment ? comment.length : 0})

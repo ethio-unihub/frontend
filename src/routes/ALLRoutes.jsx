@@ -11,6 +11,7 @@ import {
   Hashtag,
   Profile,
   Tags,
+  Search,
 } from "../pages/";
 import { Terms, About, Help, Privacy } from "../pages/Static";
 import { Message, HashtagCard } from "../components";
@@ -32,7 +33,7 @@ export const ALLRoutes = () => {
           />
         ))}
       </div>
-      <div className="mt-[200px] md:mt-[85px]">
+      <div className="mt-[200px] h-full md:mt-[85px]">
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/question/:slug" element={<Post />} />
@@ -47,7 +48,8 @@ export const ALLRoutes = () => {
           <Route path="/activate/:uid/:token" element={<ActivateAccount />} />
           <Route path="/register" element={<Register />} />
 
-          {/* profile */}
+          {/* profile and querysets */}
+          <Route path="/search/:search" element={<Search />} />
           <Route path="/hashtags" element={<Hashtag />} />
           <Route path="/tags/:id" element={<Tags />} />
           <Route path="/hashtags/:id" element={<HashtagCard />} />

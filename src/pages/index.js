@@ -13,3 +13,4 @@ export { Profile } from "./profile/Profile";
 
 export { Hashtag } from "./hashtags/Hashtag";
 export { Tags } from "./hashtags/Tags";
+export { Search } from "./hashtags/Search";

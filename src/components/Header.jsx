@@ -24,7 +24,7 @@ export const Header = () => {
     event.preventDefault();
     const queryTerm = event.target.search.value;
     event.target.reset();
-    navigate(`/search?q=${queryTerm}`);
+    navigate(`/search/${queryTerm}`);
   }
 
   useEffect(() => {
