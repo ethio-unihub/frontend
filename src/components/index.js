@@ -3,6 +3,7 @@ export { Header } from "./Header";
 export { FeedCard } from "./cards/FeedCard";
 export { ProfileCard } from "./cards/ProfileCard";
 export { HashCard } from "./cards/HashCard";
+export { HashtagCard } from "./cards/HashtagCard";
 
 export { ButtonLoading } from "./loading/ButtonLoading";
 export { QuestionCard } from "./loading/QuestionCard";

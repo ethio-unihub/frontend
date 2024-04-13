@@ -52,6 +52,7 @@ export const HashCard = ({ h }) => {
       let responseData = await response.json(); // Renamed 'data' to 'responseData'
 
       if (response.status === 200) {
+        h.subscribers = [...h.subscribers, myprofile.id];
         setLoad(false);
         addMessage({ type: "success", text: "subscribed" });
       } else {
@@ -83,6 +84,7 @@ export const HashCard = ({ h }) => {
       let responseData = await response.json(); // Renamed 'data' to 'responseData'
 
       if (response.status === 200) {
+        h.subscribers = h.subscribers.filter((item) => item !== myprofile.id);
         setLoad(false);
         addMessage({ type: "success", text: "unsubscribed" });
       } else {

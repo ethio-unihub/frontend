@@ -13,3 +13,4 @@ export { useComment } from "./comment/useComment";
 export { ScrollTop } from "./useScrollTop";
 
 export { useProfile } from "./user/useProfile";
+export { useHashtags } from "./user/useHashtags";

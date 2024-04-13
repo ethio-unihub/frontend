@@ -8,6 +8,7 @@ import {
   ResetPassword,
   ActivateAccount,
   Post,
+  Hashtag,
   Profile,
 } from "../pages/";
 import { Terms, About, Help, Privacy } from "../pages/Static";
@@ -46,6 +47,8 @@ export const ALLRoutes = () => {
           <Route path="/register" element={<Register />} />
 
           {/* profile */}
+          <Route path="/hashtags" element={<Hashtag />} />
+          <Route path="/hashtags/:id" element={<Hashtag />} />
           <Route path="/:username" element={<Profile />} />
 
           {/* static routes */}
