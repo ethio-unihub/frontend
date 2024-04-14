@@ -233,7 +233,7 @@ export const Header = () => {
           </ul>
         </div>
         <div className="flex items-center pt-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {user && myprofile ? (
+          {user ? (
             <div className="flex gap-4 justify-center items-center">
               <Notification />
               <div>
@@ -370,12 +370,12 @@ export const Header = () => {
                       </div>
                       <ul className="py-2" aria-labelledby="user-menu-button">
                         <li>
-                          <a
-                            href="#"
+                          <Link
+                            to={`/${myprofile.user_info.username}`}
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                           >
                             Dashboard
-                          </a>
+                          </Link>
                         </li>
                         <li>
                           <a

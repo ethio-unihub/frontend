@@ -1,13 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import logo from "../../assets/logo.png";
 import nodata from "../../assets/nodata.svg";
 import { HashCard } from "./HashCard";
 import { QuestionCard } from "../loading/QuestionCard";
 import { FeedCard } from "./FeedCard";
 import { useFetchPosts } from "../../hooks";
+import { AuthContext } from "../../context";
+import { FileCard } from "./FileCard";
+import { FileLoading } from "../loading/FileLoading";
 
 export const ProfileCard = ({ profile, rank }) => {
-  const [ques, setQues] = useState(true);
+  const [ques, setQues] = useState([false, true, false, false]);
   const [sortedPosts, setSortedPosts] = useState([]);
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const no =
@@ -15,30 +18,52 @@ export const ProfileCard = ({ profile, rank }) => {
   const yes =
     "py-5 mr-1 sm:mr-3 lg:mr-10 dark:text-white transition-colors duration-200 ease-in-out border-b-2 border-transparent group-[.active-assignments]:border-primary group-[.active-assignments]:text-primary text-muted hover:border-primary";
   const p = profile;
-
+  const { myprofile } = useContext(AuthContext);
+  const [url, setUrl] = useState(`${backendUrl}api/profiles/${p.id}/posts/`);
   const {
     data: posts,
     loading,
     hasMoreData,
     setData,
     loadMore,
-  } = useFetchPosts(`${backendUrl}api/profiles/${p.id}/posts/`);
+  } = useFetchPosts(url);
 
   const handleLoadMore = () => {
     loadMore();
   };
 
+  const first = () => {
+    setSortedPosts([]);
+    setUrl(`${backendUrl}api/profiles/${p.id}/posts/`);
+    setQues([true, false, false, false]);
+  };
+  const third = () => {
+    setSortedPosts([]);
+    setUrl(`${backendUrl}api/profiles/${p.id}/saved-posts/`);
+    setQues([false, false, true, false]);
+  };
+  const fourth = () => {
+    setSortedPosts([]);
+    setUrl(`${backendUrl}api/profiles/${p.id}/saved-files/`);
+    setQues([false, false, false, true]);
+  };
+  const second = () => {
+    setQues([false, true, false, false]);
+  };
+
   useEffect(() => {
-    if (posts) {
+    if (posts.length > 0) {
       // Sort the posts based on the difference between upvotes and downvotes
       const sorted = [...posts].sort((a, b) => {
-        const scoreA = a.upvote.length - a.downvote.length;
-        const scoreB = b.upvote.length - b.downvote.length;
-        return scoreB - scoreA;
+        if (!ques[3]) {
+          const scoreA = a.upvote.length - a.downvote.length;
+          const scoreB = b.upvote.length - b.downvote.length;
+          return scoreB - scoreA;
+        }
       });
       setSortedPosts(sorted);
     }
-  }, [posts, ques]);
+  }, [posts, ques, url]);
 
   return (
     <>
@@ -148,6 +173,15 @@ export const ProfileCard = ({ profile, rank }) => {
                     {" "}
                     @{p.user_info.username}{" "}
                   </a>
+                  {myprofile && myprofile.id === p.id && (
+                    <a
+                      href="javascript:void(0)"
+                      className="mr-3 mb-2 inline-flex items-center justify-center text-secondary-inverse rounded-full bg-neutral-100 hover:bg-neutral-200 transition-all duration-200 ease-in-out px-3 py-1 text-sm font-medium leading-normal"
+                    >
+                      {" "}
+                      {p.net_points} Points{" "}
+                    </a>
+                  )}
                 </div>
               </div>
             </div>
@@ -160,9 +194,9 @@ export const ProfileCard = ({ profile, rank }) => {
             <li className="flex mt-2 -mb-[2px]">
               <button
                 type="button"
-                onClick={() => setQues(false)}
+                onClick={first}
                 aria-controls="summary"
-                className={!ques ? yes : no}
+                className={ques[0] ? yes : no}
                 href="javascript:void(0)"
               >
                 {" "}
@@ -172,19 +206,47 @@ export const ProfileCard = ({ profile, rank }) => {
             <li className="flex mt-2 -mb-[2px]">
               <button
                 type="button"
-                onClick={() => setQues(true)}
+                onClick={second}
                 aria-controls="assignments"
-                className={ques ? yes : no}
+                className={ques[1] ? yes : no}
                 href="javascript:void(0)"
               >
                 {" "}
                 Hashtags{" "}
               </button>
             </li>
+            {myprofile && myprofile.id === p.id && (
+              <>
+                <li className="flex mt-2 -mb-[2px]">
+                  <button
+                    type="button"
+                    onClick={third}
+                    aria-controls="assignments"
+                    className={ques[2] ? yes : no}
+                    href="javascript:void(0)"
+                  >
+                    {" "}
+                    Saved Questions{" "}
+                  </button>
+                </li>
+                <li className="flex mt-2 -mb-[2px]">
+                  <button
+                    type="button"
+                    onClick={fourth}
+                    aria-controls="assignments"
+                    className={ques[3] ? yes : no}
+                    href="javascript:void(0)"
+                  >
+                    {" "}
+                    Saved Files{" "}
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
-      {ques && (
+      {ques[1] && (
         <div className="w-full m-4 flex flex-wrap gap-8">
           {p.subscribed_hashtags.map((h, index) => (
             <HashCard key={index} h={h} />
@@ -192,12 +254,47 @@ export const ProfileCard = ({ profile, rank }) => {
         </div>
       )}
 
-      {!ques && (
+      {ques[2] && (
         <div className="m-8">
           <div>
-            {sortedPosts.length > 0 ? (
+            {sortedPosts.length > 0
+              ? sortedPosts.map((post, index) => (
+                  <FeedCard key={index} data={post} />
+                ))
+              : !loading && (
+                  <div className="w-full flex justify-center items-center">
+                    <div className="dark:text-white flex flex-col items-center  justify-center">
+                      <img src={nodata} className="w-56" />
+                      <p className="text-2xl">No data</p>
+                    </div>
+                  </div>
+                )}
+          </div>
+          {!loading && hasMoreData && (
+            <div className="flex justify-center my-4">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleLoadMore}
+              >
+                {posts ? "Load More" : "Try again"}
+              </button>
+            </div>
+          )}
+          {loading && (
+            <>
+              {[...Array(15)].map((_, index) => (
+                <QuestionCard key={index} />
+              ))}
+            </>
+          )}
+        </div>
+      )}
+      {ques[3] && (
+        <div className="m-8">
+          <div>
+            {myprofile && sortedPosts.length > 0 ? (
               sortedPosts.map((post, index) => (
-                <FeedCard key={index} data={post} />
+                <FileCard key={index} file={post} />
               ))
             ) : (
               <div className="w-full flex justify-center items-center">
@@ -207,6 +304,53 @@ export const ProfileCard = ({ profile, rank }) => {
                 </div>
               </div>
             )}
+            {/* {myprofile && sortedPosts.length > 0
+              ? sortedPosts.map((post, index) => (
+                  <FileCard key={index} file={post} />
+                ))
+              : !loading && (
+                  <div className="w-full flex justify-center items-center">
+                    <div className="dark:text-white flex flex-col items-center  justify-center">
+                      <img src={nodata} className="w-56" />
+                      <p className="text-2xl">No data</p>
+                    </div>
+                  </div>
+                )} */}
+          </div>
+          {!loading && hasMoreData && (
+            <div className="flex justify-center my-4">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                onClick={handleLoadMore}
+              >
+                {posts ? "Load More" : "Try again"}
+              </button>
+            </div>
+          )}
+          {loading && (
+            <>
+              {[...Array(15)].map((_, index) => (
+                <FileLoading key={index} />
+              ))}
+            </>
+          )}
+        </div>
+      )}
+      {ques[0] && (
+        <div className="m-8">
+          <div>
+            {sortedPosts.length > 0
+              ? sortedPosts.map((post, index) => (
+                  <FeedCard key={index} data={post} />
+                ))
+              : !loading && (
+                  <div className="w-full flex justify-center items-center">
+                    <div className="dark:text-white flex flex-col items-center  justify-center">
+                      <img src={nodata} className="w-56" />
+                      <p className="text-2xl">No data</p>
+                    </div>
+                  </div>
+                )}
           </div>
           {!loading && hasMoreData && (
             <div className="flex justify-center my-4">
