@@ -77,11 +77,19 @@ export const FileCard = ({ file }) => {
 
   let mainclass = "";
   let clearButton = false;
-  if (myprofile && file.downvotes.indexOf(myprofile.id) !== -1) {
+  if (
+    myprofile &&
+    file.downvotes &&
+    file.downvotes.indexOf(myprofile.id) !== -1
+  ) {
     mainclass =
       "max-w-[700px] px-10 my-4 py-6 border-t-2 border-red-600 dark:bg-gray-900 dark:text-white bg-white rounded-lg shadow-md";
     clearButton = true;
-  } else if (myprofile && file.upvotes.indexOf(myprofile.id) !== -1) {
+  } else if (
+    myprofile &&
+    file.upvotes &&
+    file.upvotes.indexOf(myprofile.id) !== -1
+  ) {
     mainclass =
       "max-w-[700px] px-10 my-4 py-6 border-t-2 border-green-600 dark:bg-gray-900 dark:text-white bg-white rounded-lg shadow-md";
     clearButton = true;
@@ -95,9 +103,9 @@ export const FileCard = ({ file }) => {
       <div className={mainclass}>
         <div className="flex justify-between items-center">
           <span className="font-light dark:text-white text-gray-600">
-            {formatDistanceToNow(new Date(file.created_at), {
+            {/* {formatDistanceToNow(new Date(file.created_at), {
               addSuffix: true,
-            })}
+            })} */}
           </span>
           {clearButton && (
             <span
@@ -122,11 +130,15 @@ export const FileCard = ({ file }) => {
             {file.name}
           </a>
           <div className="flex flex-wrap gap-2 p-2">
-            {file.tag.map((tag) => (
-              <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-                {tag.name}
-              </span>
-            ))}
+            {file.tag &&
+              file.tag.map((tag) => (
+                <span
+                  key={tag.id}
+                  className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                >
+                  {tag.name}
+                </span>
+              ))}
           </div>
         </div>
         <div className="flex justify-between items-center mt-4">
@@ -142,7 +154,11 @@ export const FileCard = ({ file }) => {
                 <i className="fa-solid fa-caret-up text-2xl"></i>
               )}
             </button>
-            <b>{file.upvotes.length - file.downvotes.length}</b>
+            <b>
+              {file.upvotes && file.downvotes
+                ? file.upvotes.length - file.downvotes.length
+                : 0}
+            </b>
             <button
               type="button"
               onClick={downvoteCall}
@@ -161,7 +177,7 @@ export const FileCard = ({ file }) => {
                 onClick={saveCall}
                 className="fa-regular fa-floppy-disk cursor-pointer text-2xl dark:text-white text-gray-950 relative focus:outline-none font-medium rounded-lg text-center me-2 mb-2"
               >
-                {file.saves.length > 0 && (
+                {file.saves && file.saves.length > 0 && (
                   <span className="absolute top-[-6px] right-[-16px] -mt-2 -ml-2">
                     <div className="inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-semibold leading-4 bg-gray-800 text-white dark:bg-white dark:text-gray-800">
                       {file.saves.length}
@@ -182,7 +198,9 @@ export const FileCard = ({ file }) => {
                   <span className="material-symbols-outlined text-4xl">
                     download
                   </span>
-                  <b className="text-xl">{file.downloads.length}</b>
+                  <b className="text-xl">
+                    {file.downloads ? file.downloads.length : 0}
+                  </b>
                 </>
               )}
             </button>

@@ -146,9 +146,12 @@ export const FeedCard = ({ data }) => {
                 : data.description}
               <div className="flex flex-wrap gap-2 p-2">
                 {data.tags.map((tag) => (
-                  <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                  <Link
+                    to={`/tags/${tag.id}`}
+                    className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                  >
                     {tag.name}
-                  </span>
+                  </Link>
                 ))}
               </div>
             </Link>
@@ -368,7 +371,10 @@ export const FeedCard = ({ data }) => {
                   alt="Neil image"
                 />
               </div>
-              <div className="flex-1 min-w-0 ms-4">
+              <Link
+                to={`/${data.owner.username}`}
+                className="flex-1 min-w-0 ms-4"
+              >
                 <p className="text-sm font-medium  text-gray-900 truncate dark:text-white flex items-center gap-1">
                   {data.owner.first_name} {data.owner.last_name}
                 </p>
@@ -381,7 +387,7 @@ export const FeedCard = ({ data }) => {
                 <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                   {timeAgo}
                 </p>
-              </div>
+              </Link>
               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
                 <div className="grid gap-4 grid-cols-2 w-60 my-2.5">
                   {data.images.length > 0 && (

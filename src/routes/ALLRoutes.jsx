@@ -12,9 +12,11 @@ import {
   Profile,
   Tags,
   Search,
-  Files
+  Files,
 } from "../pages/";
 import { Terms, About, Help, Privacy } from "../pages/Static";
+import { NotificationPage } from "../pages/utils/NotificationPage";
+import { Points } from "../components/utils/Points";
 import { Message, HashtagCard } from "../components";
 import { MessageContext } from "../context";
 import CommunityPage from "../pages/CommunityPage/CommunityPage";
@@ -58,6 +60,10 @@ export const ALLRoutes = () => {
 
           {/* files */}
           <Route path="/files" element={<Files />} />
+
+          {/* utils */}
+          <Route path="/notifications" element={<NotificationPage />} />
+          <Route path="/points" element={<Points />} />
 
           {/* static routes */}
           <Route path="/terms" element={<Terms />} />

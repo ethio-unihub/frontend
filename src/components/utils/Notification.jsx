@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context";
 import { formatDistanceToNow } from "date-fns";
 import Logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
@@ -34,6 +35,7 @@ export const Notification = () => {
           if (response.ok) {
             const data = await response.json();
             setNotifications(data);
+            console.log(data);
           } else {
             console.error(
               "Failed to fetch notifications:",
@@ -70,7 +72,7 @@ export const Notification = () => {
           <path d="M12.133 10.632v-1.8A5.406 5.406 0 0 0 7.979 3.57.946.946 0 0 0 8 3.464V1.1a1 1 0 0 0-2 0v2.364a.946.946 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C1.867 13.018 0 13.614 0 14.807 0 15.4 0 16 .538 16h12.924C14 16 14 15.4 14 14.807c0-1.193-1.867-1.789-1.867-4.175ZM3.823 17a3.453 3.453 0 0 0 6.354 0H3.823Z" />
         </svg>
         {/*  */}
-        {notifications && notifications.count > 0 && (
+        {notifications && notifications.length > 0 && (
           <div className="absolute block w-3 h-3 bg-red-500 border-2 border-white rounded-full -top-0.5 start-2.5 dark:border-gray-900"></div>
         )}
       </button>
@@ -82,7 +84,7 @@ export const Notification = () => {
           aria-labelledby="dropdownNotificationButton"
         >
           <div className="block px-4 py-2 font-medium text-center text-gray-700 rounded-t-lg bg-gray-50 dark:bg-gray-800 dark:text-white">
-            <b>{notifications && notifications.count}</b> Notifications
+            <b>{notifications && notifications.length}</b> Notifications
           </div>
           <div className="divide-y divide-gray-100 dark:divide-gray-700">
             {loading && !notifications ? (
@@ -110,7 +112,7 @@ export const Notification = () => {
               </>
             ) : (
               <>
-                {notifications.results
+                {notifications
                   .slice(-4)
                   .reverse()
                   .map((notification, index) => (
@@ -159,8 +161,8 @@ export const Notification = () => {
             )}
           </div>
 
-          <a
-            href="#"
+          <Link
+            to="/notifications"
             className="block py-2 text-sm font-medium text-center text-gray-900 rounded-b-lg bg-gray-50 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
           >
             <div className="inline-flex items-center ">
@@ -175,7 +177,7 @@ export const Notification = () => {
               </svg>
               View all
             </div>
-          </a>
+          </Link>
         </div>
       )}
     </>

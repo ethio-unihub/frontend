@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { Link } from "react-router-dom";
 
 import { usePostDetail } from "../../hooks";
 import { RelatedPost } from "./RelatedPost";
@@ -61,13 +62,13 @@ export const Post = () => {
                         alt="Jese Leos"
                       />
                       <div>
-                        <a
-                          href="#"
+                        <Link
+                          to={`/${post.owner.username}`}
                           rel="author"
                           className="text-xl font-bold text-gray-900 dark:text-white"
                         >
                           {post.owner.first_name} {post.owner.last_name}
-                        </a>
+                        </Link>
                         <p className="text-base text-gray-500 dark:text-gray-400">
                           @{post.owner.username}
                         </p>
@@ -91,9 +92,12 @@ export const Post = () => {
                 </header>
                 <div className="flex flex-wrap gap-2 p-2">
                   {post.tags.map((tag) => (
-                    <span className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                    <Link
+                      to={`/tags/${tag.id}`}
+                      className="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                    >
                       {tag.name}
-                    </span>
+                    </Link>
                   ))}
                 </div>
                 <p>{post.description}</p>

@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 
-export const ImageUpload = ({ x }) => {
+export const ImageUpload = ({ x, setSelectedImages }) => {
   const [imagePreviews, setImagePreviews] = useState(Array(x).fill(null));
 
   const handleFileInputChange = (event, index) => {
-    const file = event.target.files[0];
+    const files = event.target.files;
 
-    if (file) {
-      if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-          const updatedPreviews = [...imagePreviews];
-          updatedPreviews[index] = reader.result;
-          setImagePreviews(updatedPreviews);
-        };
-      } else {
-        alert("Please select an image file.");
-      }
+    if (files.length > 0) {
+      const updatedPreviews = [...imagePreviews];
+
+      Array.from(files).forEach((file, i) => {
+        if (file.type.startsWith("image/")) {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => {
+            updatedPreviews[index + i] = reader.result;
+            setImagePreviews(updatedPreviews);
+            // Update selectedImages state
+            setSelectedImages((prevImages) => [...prevImages, file]);
+          };
+        } else {
+          alert("Please select an image file.");
+        }
+      });
     }
   };
 
@@ -27,7 +32,7 @@ export const ImageUpload = ({ x }) => {
 
     const files = event.dataTransfer.files;
     if (files.length > 0) {
-      handleFileInputChange({ target: { files: [files[0]] } }, index);
+      handleFileInputChange({ target: { files: Array.from(files) } }, index);
     }
   };
 
@@ -86,6 +91,7 @@ export const ImageUpload = ({ x }) => {
             type="file"
             className="hidden"
             onChange={(event) => handleFileInputChange(event, index)}
+            multiple
           />
         </div>
       ))}

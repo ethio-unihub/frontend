@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLeaderboard } from "../../hooks";
 import { AuthContext } from "../../context";
 import Logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
@@ -41,7 +42,11 @@ export const Leaderboard = () => {
               (lead, index) =>
                 (index < 5 ||
                   (user && myprofile && lead.id === myprofile.id)) && (
-                  <li key={index} className="flex items-center py-4 px-6">
+                  <Link
+                    to={`/${lead.user.username}`}
+                    key={index}
+                    className="flex items-center py-4 px-6"
+                  >
                     <span className="dark:text-white text-gray-700 text-lg font-medium mr-4">
                       {index + 1}.
                     </span>
@@ -61,7 +66,7 @@ export const Leaderboard = () => {
                     <span className="dark:text-white text-gray-700 text-lg font-medium mr-4">
                       {lead.total_upvotes - lead.total_downvotes} votes
                     </span>
-                  </li>
+                  </Link>
                 )
             )}
       </ul>
