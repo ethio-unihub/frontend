@@ -26,7 +26,7 @@ export const Hashtag = () => {
                       key={index}
                       className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
                     >
-                      <span class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3 material-symbols-outlined">
+                      <span className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3 material-symbols-outlined">
                         tag
                       </span>
                       <div className="mb-2 w-20 h-6 bg-gray-900 dark:bg-white animate-pulse"></div>

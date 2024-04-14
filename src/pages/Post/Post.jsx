@@ -129,25 +129,25 @@ export const Post = () => {
       ) : (
         <div>
           {/* Skeleton Loading Effect */}
-          <div class="w-full md:fixed p-12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <div class="animate-pulse flex flex-col items-center">
+          <div className="w-full md:fixed p-12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="animate-pulse flex flex-col items-center">
               <div className="flex gap-4">
                 {/* Placeholder for Vote Count */}
                 <div className="w-12 h-6 bg-gray-200 dark:bg-gray-600 rounded-lg"></div>
                 {/* Placeholder for Save Count */}
                 <div className="w-12 h-6 bg-gray-200 dark:bg-gray-600 rounded-lg"></div>
               </div>
-              <div class="flex gap-4 mt-4 md:mt-6">
+              <div className="flex gap-4 mt-4 md:mt-6">
                 {/* Placeholder for Vote Button */}
-                <div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
                 {/* Placeholder for Save Button */}
-                <div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
                 {/* Placeholder for Floppy Disk Icon */}
-                <div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
                 {/* Placeholder for Share Icon */}
-                <div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
+                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full"></div>
                 {/* Placeholder for Report Button */}
-                <div class="w-20 h-12 bg-gray-200 dark:bg-gray-600 rounded-lg"></div>
+                <div className="w-20 h-12 bg-gray-200 dark:bg-gray-600 rounded-lg"></div>
               </div>
             </div>
           </div>

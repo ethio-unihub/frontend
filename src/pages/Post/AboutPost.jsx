@@ -74,8 +74,8 @@ export const AboutPost = ({ post }) => {
   }
   return (
     <div>
-      <div class="w-full md:fixed p-12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex flex-col items-center">
+      <div className="w-full md:fixed p-12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="flex flex-col items-center">
           <div className="flex gap-4">
             <h1 className="text-dark-700 dark:text-white">
               {post.upvote.length - post.downvote.length} Votes
@@ -92,11 +92,11 @@ export const AboutPost = ({ post }) => {
               </span>
             )}
           </div>
-          <div class="flex gap-4 mt-4 md:mt-6">
+          <div className="flex gap-4 mt-4 md:mt-6">
             <button
               type="button"
               onClick={upvoteCall}
-              class=" px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className=" px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               {loading[0] ? (
                 svg
@@ -107,7 +107,7 @@ export const AboutPost = ({ post }) => {
             <button
               type="button"
               onClick={downvoteCall}
-              class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               {loading[1] ? (
                 svg
@@ -117,7 +117,7 @@ export const AboutPost = ({ post }) => {
             </button>
             <button
               type="button"
-              class="px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               {loading[2] ? (
                 svg
@@ -130,25 +130,27 @@ export const AboutPost = ({ post }) => {
             </button>
             <a
               href="#"
-              class="px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <i className="fa-regular fa-share-from-square text-2xl"></i>
             </a>
             <a
               href="#"
-              class="px-4 py-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="px-4 py-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Report
             </a>
           </div>
         </div>
-        {post.video &&<div className=" text-dark-700 dark:text-white border-2 mt-4 rounded-md p-2">
-          <video class="w-96 rounded-md" controls>
-            <source src={post.video} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          About the question
-        </div>}
+        {post.video && (
+          <div className=" text-dark-700 dark:text-white border-2 mt-4 rounded-md p-2">
+            <video className="w-96 rounded-md" controls>
+              <source src={post.video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            About the question
+          </div>
+        )}
       </div>
     </div>
   );

@@ -41,7 +41,7 @@ export const LeftBar = () => {
 
       <aside
         id="separator-sidebar"
-        className={`fixed top-[130px] md:top-[77px] left-0 z-40 w-64 h-screen transition-transform ${
+        className={`fixed top-[130px] md:top-[77px] overflow-y-scroll pb-4 left-0 z-40 w-64 h-screen transition-transform ${
           side && "-translate-x-full z-10"
         } sm:translate-x-0`}
         aria-label="Sidebar"
@@ -71,8 +71,8 @@ export const LeftBar = () => {
                     (community, index) =>
                       index < 5 && (
                         <li key={index} className="pt-3 pb-0 sm:pt-4">
-                          <a
-                            href="#"
+                          <Link
+                            to={`/hashtags/${community.id}`}
                             className="flex items-center space-x-4 rtl:space-x-reverse"
                           >
                             <div className="flex-shrink-0">#</div>
@@ -89,10 +89,27 @@ export const LeftBar = () => {
                                 community.subscribers.length}{" "}
                               subs
                             </div>
-                          </a>
+                          </Link>
                         </li>
                       )
                   )}
+              <li className="pt-3 pb-0 sm:pt-4">
+                <Link
+                  to="/hashtags"
+                  href="#"
+                  className="flex items-center space-x-4 rtl:space-x-reverse"
+                >
+                  <div className="flex-shrink-0">#</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                      All Hashtags
+                    </p>
+                    <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                      {/* {community.Email} */}
+                    </p>
+                  </div>
+                </Link>
+              </li>
             </ul>
           </div>
           <div>

@@ -14,7 +14,9 @@ export const useFetchPosts = (url) => {
       if (pageNumber === 1) {
         setData([]);
       }
-      setData((prevData) => [...prevData, ...get.results]);
+      if (get.results.length > 0) {
+        setData((prevData) => [...prevData, ...get.results]);
+      }
       setPage(pageNumber);
       setLoading(false);
       setHasMoreData(get.next !== null);

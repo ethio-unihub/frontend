@@ -95,16 +95,16 @@ export const HashCard = ({ h }) => {
     }
   };
   return (
-    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-      <span class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3 material-symbols-outlined">
+    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <span className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3 material-symbols-outlined">
         tag
       </span>
       <a href="#">
-        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
           {h.name}
         </h5>
       </a>
-      <p class="mb-3 font-normal text-gray-500 flex justify-between gap-8 dark:text-gray-400">
+      <p className="mb-3 font-normal text-gray-500 flex justify-between gap-8 dark:text-gray-400">
         <p>{h.subscribers.length} subscribers</p>
         <p>under {h.organization.length} universities</p>
       </p>
@@ -112,7 +112,7 @@ export const HashCard = ({ h }) => {
         load ? (
           <button
             type="button"
-            class="text-gray-900 bg-gradient-to-r flex from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            className="text-gray-900 bg-gradient-to-r flex from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             subscribing...{svg}
           </button>
@@ -120,7 +120,7 @@ export const HashCard = ({ h }) => {
           <button
             type="button"
             onClick={sub}
-            class="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            className="text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
           >
             Subscribe
           </button>
@@ -128,7 +128,7 @@ export const HashCard = ({ h }) => {
       ) : load ? (
         <button
           type="button"
-          class="text-white bg-gradient-to-r flex from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-white bg-gradient-to-r flex from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
           Unsubscribing... {svg}
         </button>
@@ -136,7 +136,7 @@ export const HashCard = ({ h }) => {
         <button
           type="button"
           onClick={unsub}
-          class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
           Unsubscribe
         </button>
