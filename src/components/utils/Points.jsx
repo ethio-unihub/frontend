@@ -20,7 +20,7 @@ export const Points = () => {
         try {
           setLoading(true);
           const id = myprofile.id;
-          const token = authTokens.access;
+          const token = authTokens ? authTokens.access : null;
           const response = await fetch(
             `${backendUrl}api/profiles/${id}/badges/`,
             {

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export const useAddpost = (backendUrl, token, onSuccess, onError) => {
   const [loading, setLoading] = useState(false);
+  const [post, setPost] = useState(null)
 
   const handlePostRequest = async (postData) => {
     setLoading(true);
@@ -21,7 +22,8 @@ export const useAddpost = (backendUrl, token, onSuccess, onError) => {
       }
 
       const postDataJson = await postResponse.json();
-      onSuccess(postDataJson);
+      setPost(postDataJson);
+      console.log(post);
     } catch (error) {
       console.error("Error:", error.message);
       onError(error);

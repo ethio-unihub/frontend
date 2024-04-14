@@ -15,7 +15,7 @@ export const FeedCard = ({ data }) => {
   const timeAgo = formatDistanceToNow(addedDate, { addSuffix: true });
   const navigate = useNavigate();
   const [loading, setLoading] = useState([false, false, false, false, false]);
-  const { upvote, downvote, save, clear } = usePost(data, backendUrl);
+  const { upvote, downvote, save, clear, report } = usePost(data, backendUrl);
   const svg = (
     <svg
       aria-hidden="true"
@@ -71,9 +71,11 @@ export const FeedCard = ({ data }) => {
       navigate("/login");
     }
   };
-  const report = () => {
-    setLoading([false, false, false, true, false]);
+  const reportCall = async () => {
     if (user) {
+      setLoading([false, false, false, true, false]);
+      await report();
+      setLoading([false, false, false, false, false]);
     } else {
       navigate("/login");
     }
@@ -321,37 +323,12 @@ export const FeedCard = ({ data }) => {
                       <li>
                         <button
                           type="button"
-                          onClick={report}
+                          onClick={reportCall}
                           className="w-full flex justify-center self-center text-center px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                         >
                           {loading[3] ? svg : "Report"}
                         </button>
                       </li>
-                      {user &&
-                        myprofile &&
-                        myprofile.user_info.username ===
-                          data.owner.username && (
-                          <>
-                            <li>
-                              <button
-                                type="button"
-                                onClick={report}
-                                className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              >
-                                Edit
-                              </button>
-                            </li>
-                            <li>
-                              <button
-                                type="button"
-                                onClick={report}
-                                className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                              >
-                                Delete
-                              </button>
-                            </li>
-                          </>
-                        )}
                     </ul>
                   </div>
                 )}

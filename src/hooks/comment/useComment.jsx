@@ -8,9 +8,9 @@ export const useComment = (id, backendUrl) => {
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
+  const token = authTokens ? authTokens.access : null;
   const { addMessage } = useContext(MessageContext);
   const [comment, setComment] = useState([]);
-  const token = authTokens.access;
 
   useEffect(() => {
     const fetchComment = async () => {

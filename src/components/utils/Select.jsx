@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const MultiSelect = ({ onChange }) => {
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
@@ -23,25 +23,27 @@ export const MultiSelect = ({ onChange }) => {
     getTags();
   }, []);
 
-  useEffect(() => {
-    // Remove selected options from the dropdown
-    setOptions(
-      options.filter((option) => !selectedOptions.includes(option.name))
-    );
-  }, [selectedOptions]);
-
   const handleOptionClick = (option) => {
-    setSelectedOptions([...selectedOptions, option.name]);
+    setSelectedOptions([
+      ...selectedOptions,
+      { id: option.id, name: option.name },
+    ]);
     setSearchText("");
-    onChange && onChange([...selectedOptions, option.name]);
+    onChange &&
+      onChange([...selectedOptions, { id: option.id, name: option.name }]);
+    // Remove selected option from dropdown
+    setOptions(options.filter((opt) => opt.id !== option.id));
   };
 
-  const handleRemoveTag = (optionName) => {
-    const updatedOptions = selectedOptions.filter(
-      (item) => item !== optionName
-    );
+  const handleRemoveTag = (tagId) => {
+    const updatedOptions = selectedOptions.filter((opt) => opt.id !== tagId);
     setSelectedOptions(updatedOptions);
     onChange && onChange(updatedOptions);
+    // Add removed option back to dropdown
+    const removedOption = selectedOptions.find((opt) => opt.id === tagId);
+    if (removedOption) {
+      setOptions([...options, removedOption]);
+    }
   };
 
   return (
@@ -72,13 +74,13 @@ export const MultiSelect = ({ onChange }) => {
         </div>
       )}
       <div className="mt-2 flex flex-wrap">
-        {selectedOptions.map((optionName, index) => (
+        {selectedOptions.map((tag, index) => (
           <div
             key={index}
             className="bg-blue-500 text-white py-1 px-2 rounded-full mr-2 mb-2 cursor-pointer"
-            onClick={() => handleRemoveTag(optionName)}
+            onClick={() => handleRemoveTag(tag.id)}
           >
-            {optionName}
+            {tag.name}
           </div>
         ))}
       </div>

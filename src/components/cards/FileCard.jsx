@@ -10,7 +10,10 @@ export const FileCard = ({ file }) => {
   const navigate = useNavigate();
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const [loading, setLoading] = useState([false, false, false, false, false]);
-  const { upvote, downvote, save, clear, download } = useFile(file, backendUrl);
+  const { upvote, downvote, save, clear, download, report } = useFile(
+    file,
+    backendUrl
+  );
   const svg = (
     <svg
       aria-hidden="true"
@@ -31,45 +34,54 @@ export const FileCard = ({ file }) => {
   );
   const upvoteCall = async () => {
     if (myprofile) {
-      setLoading([true, false, false, false, false]);
+      setLoading([true, false, false, false, false, false]);
       await upvote();
-      setLoading([false, false, false, false, false]);
+      setLoading([false, false, false, false, false, false]);
     } else {
       navigate("/login");
     }
   };
   const downvoteCall = async () => {
     if (myprofile) {
-      setLoading([false, true, false, false, false]);
+      setLoading([false, true, false, false, false, false]);
       await downvote();
-      setLoading([false, false, false, false, false]);
+      setLoading([false, false, false, false, false, false]);
     } else {
       navigate("/login");
     }
   };
   const saveCall = async () => {
     if (myprofile) {
-      setLoading([false, false, true, false, false]);
+      setLoading([false, false, true, false, false, false]);
       await save();
-      setLoading([false, false, false, false, false]);
+      setLoading([false, false, false, false, false, false]);
     } else {
       navigate("/login");
     }
   };
   const clearCall = async () => {
     if (myprofile) {
-      setLoading([false, false, false, true, false]);
+      setLoading([false, false, false, true, false, false]);
       await clear();
-      setLoading([false, false, false, false, false]);
+      setLoading([false, false, false, false, false, false]);
     } else {
       navigate("/login");
     }
   };
   const downloadCall = async () => {
     if (myprofile) {
-      setLoading([false, false, false, false, true]);
+      setLoading([false, false, false, false, true, false]);
       await download();
-      setLoading([false, false, false, false, false]);
+      setLoading([false, false, false, false, false, false]);
+    } else {
+      navigate("/login");
+    }
+  };
+  const reportCall = async () => {
+    if (myprofile) {
+      setLoading([false, false, false, false, false, true]);
+      await report();
+      setLoading([false, false, false, false, false, false]);
     } else {
       navigate("/login");
     }
@@ -115,12 +127,13 @@ export const FileCard = ({ file }) => {
               {loading[3] ? svg : "clear vote"}
             </span>
           )}
-          <a
+          <button
+            type="button"
             className="px-2 py-1 bg-gray-600 text-gray-100 font-bold rounded hover:bg-gray-500"
-            href="#"
+            onClick={reportCall}
           >
-            Report
-          </a>
+            {loading[5] ? svg : "Report "}
+          </button>
         </div>
         <div className="mt-2">
           <a

@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       const id = user.user_id;
       const getProfile = async () => {
         try {
-          const token = authTokens.access;
+          const token = authTokens ? authTokens.access : null;
           const response = await fetch(`${backendUrl}api/profile/${id}`, {
             headers: {
               Authorization: `Alpha ${token}`,
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
       };
       getProfile();
     }
-  }, [authTokens,user]);
+  }, [authTokens, user]);
   const [loading, setLoading] = useState(true);
 
   const { addMessage } = useContext(MessageContext);

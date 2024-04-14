@@ -23,7 +23,7 @@ export const Notification = () => {
         try {
           setLoading(true); // Set loading state to true before fetching
           const id = myprofile.id;
-          const token = authTokens.access;
+          const token = authTokens ? authTokens.access : null;
           const response = await fetch(
             `${backendUrl}api/profiles/${id}/notifications/`,
             {

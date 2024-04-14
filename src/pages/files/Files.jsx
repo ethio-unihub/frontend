@@ -54,6 +54,7 @@ export const Files = () => {
           </h1>
           {sortedPosts &&
             sortedPosts.map((post, index) => (
+              post.reports.length <= 0 &&
               <FileCard key={index} file={post} />
             ))}
           {!loading && hasMoreData ? (

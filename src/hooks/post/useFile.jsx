@@ -11,7 +11,7 @@ export const useFile = (data, backendUrl) => {
       : null
   );
   const { addMessage } = useContext(MessageContext);
-  const token = authTokens.access;
+  const token = authTokens ? authTokens.access : null;
 
   let upvote = async () => {
     console.log(data);
@@ -177,7 +177,9 @@ export const useFile = (data, backendUrl) => {
           text: "File download started",
         });
         data.downloads = responseData.downloads;
-        navigate(data.file);
+
+        // Start download using the link obtained from .download
+        startDownload(data.file);
       } else {
         addMessage({ type: "error", text: "Invalid Credentials" });
       }
@@ -186,5 +188,46 @@ export const useFile = (data, backendUrl) => {
     }
   };
 
-  return { upvote, downvote, save, clear, download };
+  let report =  async () => {
+    try {
+      let response = await Promise.race([
+        fetch(`${backendUrl}api/files/${data.id}/`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Alpha ${token}`,
+          },
+          body: JSON.stringify({
+            reports: [...data.reports, myprofile.id],
+          }),
+        }),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Request timed out")), 20000)
+        ),
+      ]);
+
+      let responseData = await response.json(); // Renamed 'data' to 'responseData'
+
+      if (response.status === 200) {
+        addMessage({
+          type: "success",
+          text: "File reported we will check and take actions tank you for your information",
+        });
+      } else {
+        addMessage({ type: "error", text: "Invalid Credentials" });
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
+    }
+  }
+  // Function to start download
+  let startDownload = (downloadLink) => {
+    // Create an anchor element to initiate the download
+    let link = document.createElement("a");
+    link.href = downloadLink;
+    link.download = ""; // Optional: set a default download filename
+    link.click();
+  };
+
+  return { upvote, downvote, save, clear, download, report };
 };

@@ -87,9 +87,13 @@ export const ForYou = () => {
             ))}
         </div>
         <div>
-          {sortedPosts.map((post, index) => (
-            <FeedCard key={index} data={post} />
-          ))}
+          {myprofile &&
+            sortedPosts.map(
+              (post, index) =>
+                post.reports.length <= 0 && (
+                  <FeedCard key={index} data={post} />
+                )
+            )}
         </div>
         {!loading && hasMoreData && (
           <div className="flex justify-center my-4">

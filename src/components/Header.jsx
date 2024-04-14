@@ -239,7 +239,7 @@ export const Header = () => {
           {user ? (
             <div className="flex gap-4 justify-center items-center">
               <Notification />
-              {/* <AddPost /> */}
+              <AddPost />
               <div>
                 {loadingMyProfile && !myprofile ? (
                   <button
@@ -294,21 +294,14 @@ export const Header = () => {
                           </Link>
                         </li>
                         <li>
-                          <a
-                            href="#"
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Settings
-                          </a>
-                        </li>
-                        <Link to={`/points`}>
-                          <a
+                          <Link
+                            to={`/points`}
                             href="#"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                           >
                             Earnings
-                          </a>
-                        </Link>
+                          </Link>
+                        </li>
                         <li>
                           <button
                             type="button"
@@ -328,13 +321,13 @@ export const Header = () => {
             <>
               <Link
                 to="register/"
-                className="text-white bg-blue-700 hover:text-red-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
               >
                 Sign up
               </Link>
               <Link
                 to="login/"
-                className="text-white bg-gray-800l focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                className="text-white bg-gray-800l focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 bg-gray-800 hover:bg-gray-700 border-gray-700"
               >
                 Sign In
               </Link>

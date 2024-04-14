@@ -11,7 +11,7 @@ export const HashCard = ({ h }) => {
       ? JSON.parse(localStorage.getItem("authTokens"))
       : null
   );
-  const token = authTokens.access;
+  const token = authTokens ? authTokens.access : null;
   const svg = (
     <svg
       aria-hidden="true"

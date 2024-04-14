@@ -117,7 +117,7 @@ export const ProfileCard = ({ profile, rank }) => {
                           />
                         </svg>
                       </span>{" "}
-                      Rank: {rank}{" "}
+                      Rank: {rank + 1}{" "}
                     </a>
                     <a
                       className="flex items-center mb-2 mr-5 text-secondary-dark dark:text-white hover:text-primary"

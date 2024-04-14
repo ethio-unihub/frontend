@@ -1,49 +1,99 @@
-// AddPost.js
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ImageUpload } from "./ImageUploader";
-import { Select } from "..";
+import { Select } from "../../components";
 import { useAddpost } from "../../hooks/useAddpost";
+import { AuthContext, MessageContext } from "../../context";
 
 export const AddPost = () => {
+  const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
   const [showModal, setShowModal] = useState(false);
-  const [questionName, setQuestionName] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [description, setDescription] = useState("");
-
-  const handleSuccess = (postDataJson) => {
-    console.log("Post created successfully:", postDataJson);
-    // Reset form fields or any other actions after successful post creation
-  };
-
-  const handleError = (error) => {
-    console.error("Error creating post:", error.message);
-    // Handle error state or display error message to the user
-  };
-
-  const { loading, handlePostRequest } = useAddpost(
-    "http://localhost:8000/",
-    "yourAuthToken",
-    handleSuccess,
-    handleError
+  const [authTokens] = useState(() =>
+    localStorage.getItem("authTokens")
+      ? JSON.parse(localStorage.getItem("authTokens"))
+      : null
   );
+  const token = authTokens ? authTokens.access : null;
+  const { myprofile } = useContext(AuthContext);
+  const { addMessage } = useContext(MessageContext); // State to manage selected options
 
-  const handleQuestionSubmit = (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const postData = {
-      name: formData.get("name"),
-      description: formData.get("description"),
-      tags: selectedTags,
-      video: formData.get("video"),
-    };
-
-    handlePostRequest(postData);
+  const handleSelectedOptionsChange = (options) => {
+    setSelectedOptions(options);
   };
 
+  const handleSelectedImagesChange = (images) => {
+    setSelectedImages(images); // Update selected images state
+  };
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const description = e.target.description.value;
+    const selectedOptionIds = selectedOptions.map((option) => option.id);
+    const videoFile = e.target.video.files[0];
+    const video = videoFile ? videoFile : null;
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("owner", myprofile.id);
+    formData.append("description", description);
+    formData.append("options", JSON.stringify(selectedOptionIds));
+    if (video) {
+      formData.append("video", video);
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(`${backendUrl}api/posts/`, {
+        method: "POST",
+        headers: {
+          Authorization: `Alpha ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create post");
+      }
+
+      addMessage({ type: "success", text: "Question published" });
+
+      // Handle image upload
+      if (selectedImages.length > 0) {
+        const postResponseData = await response.json();
+        const postId = postResponseData.id;
+
+        for (const image of selectedImages) {
+          const imagesFormData = new FormData();
+          imagesFormData.append("images", image);
+          imagesFormData.append("post", postId);
+
+          const imagesResponse = await fetch(
+            `${backendUrl}api/posts/${postId}/images/`,
+            {
+              method: "POST",
+              headers: {
+                Authorization: `Alpha ${token}`,
+              },
+              body: imagesFormData,
+            }
+          );
+
+          if (!imagesResponse.ok) {
+            throw new Error("Failed to upload images");
+          }
+        }
+      }
+    } catch (error) {
+      addMessage({ type: "error", text: error.message });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -101,7 +151,7 @@ export const AddPost = () => {
                 <div className="p-4 md:p-5">
                   <form
                     className="space-y-4"
-                    onSubmit={handleQuestionSubmit}
+                    onSubmit={handleSubmit} // Attach handleSubmit to form submission
                     action="#"
                   >
                     <div>
@@ -111,7 +161,7 @@ export const AddPost = () => {
                       <div className="w-full">
                         <ImageUpload
                           x={3}
-                          setSelectedImages={setSelectedImages}
+                          setSelectedImages={handleSelectedImagesChange}
                         />
                       </div>
                     </div>
@@ -156,14 +206,19 @@ export const AddPost = () => {
                           rows="8"
                           className="block w-full outline-none px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
                           placeholder="Explain your question briefly..."
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
+                          name="description"
+                          // value={description}
+                          // onChange={(e) => setDescription(e.target.value)}
                           required
                         ></textarea>
                       </div>
                     </div>
                     <div>
-                      <Select onChange={setSelectedTags} />
+                      {/* Pass selectedOptions state and handleSelectedOptionsChange function to MultiSelect component */}
+                      <Select
+                        selectedOptions={selectedOptions}
+                        onChange={handleSelectedOptionsChange}
+                      />
                     </div>
                     <button
                       type="submit"
