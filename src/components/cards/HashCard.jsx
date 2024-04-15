@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext, MessageContext } from "../../context";
+import { Link } from "react-router-dom";
 
 export const HashCard = ({ h }) => {
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
@@ -95,7 +96,7 @@ export const HashCard = ({ h }) => {
     }
   };
   return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <Link to={`/hashtags/${h.id}`} className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <span className="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3 material-symbols-outlined">
         tag
       </span>
@@ -141,6 +142,6 @@ export const HashCard = ({ h }) => {
           Unsubscribe
         </button>
       )}
-    </div>
+    </Link>
   );
 };

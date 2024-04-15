@@ -42,18 +42,18 @@ export const Search = () => {
         <h1 className="text-2xl dark:text-white">Searched for: {search}</h1>
 
         <div className="m-8">
-          {sortedPosts.length > 0 ? (
-            sortedPosts.map((post, index) => (
-              <FeedCard key={index} data={post} />
-            ))
-          ) : (
-            <div className="w-full flex justify-center h-screen items-center">
-              <div className="dark:text-white flex flex-col items-center justify-center">
-                <img src={nodata} className="w-56" alt="No data found" />
-                <p className="text-2xl">No Question Found</p>
-              </div>
-            </div>
-          )}
+          {sortedPosts.length > 0
+            ? sortedPosts.map((post, index) => (
+                <FeedCard key={index} data={post} />
+              ))
+            : !loading && (
+                <div className="w-full flex justify-center h-screen items-center">
+                  <div className="dark:text-white flex flex-col items-center justify-center">
+                    <img src={nodata} className="w-56" alt="No data found" />
+                    <p className="text-2xl">No Question Found</p>
+                  </div>
+                </div>
+              )}
 
           {!loading && hasMoreData && (
             <div className="flex justify-center my-4">

@@ -129,7 +129,7 @@ export const Post = () => {
         {post && <CommentSection id={post.id} />}
       </div>
       {post ? (
-        <AboutPost post={post} />
+        <AboutPost post={post}  />
       ) : (
         <div>
           {/* Skeleton Loading Effect */}

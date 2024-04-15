@@ -26,26 +26,33 @@ export const ProfileCard = ({ profile, rank }) => {
     hasMoreData,
     setData,
     loadMore,
+    setLoading,
   } = useFetchPosts(url);
 
   const handleLoadMore = () => {
     loadMore();
   };
 
-  const first = () => {
+  const first = async () => {
     setSortedPosts([]);
-    setUrl(`${backendUrl}api/profiles/${p.id}/posts/`);
+    setLoading(true);
+    await setUrl(`${backendUrl}api/profiles/${p.id}/posts/`);
     setQues([true, false, false, false]);
+    setLoading(false);
   };
-  const third = () => {
+  const third = async () => {
     setSortedPosts([]);
-    setUrl(`${backendUrl}api/profiles/${p.id}/saved-posts/`);
+    setLoading(true);
+    await setUrl(`${backendUrl}api/profiles/${p.id}/saved-posts/`);
     setQues([false, false, true, false]);
+    setLoading(false);
   };
-  const fourth = () => {
+  const fourth = async () => {
     setSortedPosts([]);
-    setUrl(`${backendUrl}api/profiles/${p.id}/saved-files/`);
+    setLoading(true);
+    await setUrl(`${backendUrl}api/profiles/${p.id}/saved-files/`);
     setQues([false, false, false, true]);
+    setLoading(false);
   };
   const second = () => {
     setQues([false, true, false, false]);
@@ -54,14 +61,15 @@ export const ProfileCard = ({ profile, rank }) => {
   useEffect(() => {
     if (posts.length > 0) {
       // Sort the posts based on the difference between upvotes and downvotes
-      const sorted = [...posts].sort((a, b) => {
-        if (!ques[3]) {
+      if (ques[0] && !ques[1] && !ques[2] && !ques[3]) {
+        const sorted = [...posts].sort((a, b) => {
           const scoreA = a.upvote.length - a.downvote.length;
           const scoreB = b.upvote.length - b.downvote.length;
           return scoreB - scoreA;
-        }
-      });
-      setSortedPosts(sorted);
+        });
+        setSortedPosts(sorted);
+      }
+      setSortedPosts(posts);
     }
   }, [posts, ques, url]);
 
@@ -257,7 +265,7 @@ export const ProfileCard = ({ profile, rank }) => {
       {ques[2] && (
         <div className="m-8">
           <div>
-            {sortedPosts.length > 0
+            {!loading && sortedPosts && sortedPosts.length > 0
               ? sortedPosts.map((post, index) => (
                   <FeedCard key={index} data={post} />
                 ))
@@ -292,17 +300,19 @@ export const ProfileCard = ({ profile, rank }) => {
       {ques[3] && (
         <div className="m-8">
           <div>
-            {myprofile && sortedPosts.length > 0 ? (
+            {!loading && sortedPosts && myprofile && sortedPosts.length > 0 ? (
               sortedPosts.map((post, index) => (
                 <FileCard key={index} file={post} />
               ))
-            ) : (
+            ) : loading ? (
               <div className="w-full flex justify-center items-center">
                 <div className="dark:text-white flex flex-col items-center  justify-center">
                   <img src={nodata} className="w-56" />
                   <p className="text-2xl">No data</p>
                 </div>
               </div>
+            ) : (
+              <FileLoading />
             )}
             {/* {myprofile && sortedPosts.length > 0
               ? sortedPosts.map((post, index) => (
@@ -339,7 +349,7 @@ export const ProfileCard = ({ profile, rank }) => {
       {ques[0] && (
         <div className="m-8">
           <div>
-            {sortedPosts.length > 0
+            {sortedPosts && sortedPosts.length > 0
               ? sortedPosts.map((post, index) => (
                   <FeedCard key={index} data={post} />
                 ))

@@ -35,5 +35,5 @@ export const useFetchPosts = (url) => {
     fetchPost(nextPage);
   };
 
-  return { data, setData, loading, hasMoreData, loadMore, fetchPost };
+  return { data, setData, loading, hasMoreData, setLoading, loadMore, fetchPost };
 };

@@ -2,13 +2,20 @@ import { useContext, useState } from "react";
 import { usePost } from "../../hooks";
 import { AuthContext } from "../../context";
 import { useNavigate } from "react-router-dom";
+import { ShareComponent } from "../../components/utils/Share";
 
 export const AboutPost = ({ post }) => {
   const { user, myprofile } = useContext(AuthContext);
   const backendUrl = import.meta.env.VITE_REACT_APP_BACKEND_URL;
+  const frontendUrl = import.meta.env.VITE_REACT_APP_FRONTEND_URL;
   const [loading, setLoading] = useState([false, false, false, false, false]);
-  const { upvote, downvote, save, clear } = usePost(post, backendUrl);
+  const { upvote, downvote, save, clear, report } = usePost(post, backendUrl);
   const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const svg = (
     <svg
       aria-hidden="true"
@@ -64,6 +71,16 @@ export const AboutPost = ({ post }) => {
       navigate("/login");
     }
   };
+  const reportCall = async () => {
+    if (user) {
+      setLoading([false, false, false, false, true]);
+      await report();
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  };
+
   let clearButton = false;
   if (myprofile && post.downvote.indexOf(myprofile.id) !== -1) {
     clearButton = true;
@@ -72,8 +89,65 @@ export const AboutPost = ({ post }) => {
   } else {
     clearButton = false;
   }
+
   return (
     <div>
+      {isModalOpen && (
+        <div
+          id="course-modal"
+          tabIndex="-1"
+          aria-hidden="true"
+          className="font-sans overflow-y-auto overflow-x-hidden fixed top-1/2 left-16 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        >
+          <div className="relative p-4 w-full max-w-lg max-h-full">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-800">
+              <div className="flex items-center justify-between p-4 md:p-5">
+                <h3 className="text-lg text-gray-500 dark:text-gray-400">
+                  Share Question
+                </h3>
+                <button
+                  type="button"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-700 dark:hover:text-white"
+                  onClick={closeModal}
+                >
+                  <svg
+                    className="w-3 h-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                    />
+                  </svg>
+                  <span className="sr-only">Close modal</span>
+                </button>
+              </div>
+              <div className="px-4 pb-4 md:px-5 md:pb-5">
+                <label
+                  htmlFor="course-url"
+                  className="text-sm font-medium text-gray-900 dark:text-white mb-2 block"
+                >
+                  Share the question link :
+                </label>
+                <ShareComponent url={`${frontendUrl}question/${post.slug}`} />
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="w-full md:fixed p-12 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div className="flex flex-col items-center">
           <div className="flex gap-4">
@@ -128,18 +202,20 @@ export const AboutPost = ({ post }) => {
                 ></i>
               )}
             </button>
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={() => setIsModalOpen(!isModalOpen)}
               className="px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               <i className="fa-regular fa-share-from-square text-2xl"></i>
-            </a>
-            <a
-              href="#"
+            </button>
+            <button
+              type="button"
+              onClick={reportCall}
               className="px-4 py-4 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Report
-            </a>
+            </button>
           </div>
         </div>
         {post.video && (
