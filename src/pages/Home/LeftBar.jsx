@@ -151,7 +151,7 @@ export const LeftBar = () => {
                   <span className="ms-3">Terms & Conditions</span>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to="/privacy"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -186,7 +186,7 @@ export const LeftBar = () => {
                   </svg>
                   <span className="ms-3">Help</span>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
