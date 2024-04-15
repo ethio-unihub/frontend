@@ -246,7 +246,7 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         addMessage({
           type: "success",
-          text: "Thank you for creating your account. Please verify your email address.",
+          text: "Thank you for creating your account. ",
         });
         navigate("/login");
       } else if (response.status == 400) {

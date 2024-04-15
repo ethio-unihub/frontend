@@ -98,7 +98,6 @@ export const About = () => {
             </div>
           </section>
         </section>
-
         <section class="">
           <section class="">
             <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
