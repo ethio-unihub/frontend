@@ -263,7 +263,9 @@ export const Header = () => {
                       <img
                         className="w-8 h-8 rounded-full"
                         src={
-                          myprofile.profile_pic ? myprofile.profile_pic : Logo
+                          myprofile.profile_pic !== null
+                            ? myprofile.profile_pic
+                            : Logo
                         }
                         alt="user photo"
                       />

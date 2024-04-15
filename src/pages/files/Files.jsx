@@ -53,10 +53,17 @@ export const Files = () => {
             {search.length > 0 && `searched for: ${search}`}
           </h1>
           {sortedPosts &&
-            sortedPosts.map((post, index) => (
-              post.reports.length <= 0 &&
-              <FileCard key={index} file={post} />
-            ))}
+            sortedPosts.map(
+              (post, index) =>
+                post.reports.length <= 0 && <FileCard key={index} file={post} />
+            )}
+          {loading && (
+            <>
+              {[...Array(15)].map((_, index) => (
+                <FileLoading key={index} />
+              ))}
+            </>
+          )}
           {!loading && hasMoreData ? (
             <div className="flex justify-center my-4">
               <button
@@ -75,13 +82,6 @@ export const Files = () => {
                 </div>
               </div>
             )
-          )}
-          {loading && (
-            <>
-              {[...Array(15)].map((_, index) => (
-                <FileLoading key={index} />
-              ))}
-            </>
           )}
         </div>
         <Filter url={url} search={setSearch} set={setUrl} />

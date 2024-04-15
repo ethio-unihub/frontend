@@ -62,7 +62,7 @@ export const AddPost = () => {
       }
 
       addMessage({ type: "success", text: "Question published" });
-
+      setShowModal(!showModal);
       // Handle image upload
       if (selectedImages.length > 0) {
         const postResponseData = await response.json();
